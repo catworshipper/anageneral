@@ -1,12 +1,12 @@
 {
-  "version": "v260626.06 12:45p",
-  "release": 6,
-  "sha": "9e8252c",
-  "fullSha": "9e8252c8f91818ce088b757fceb94173bb7fcf57",
+  "version": "v260626.07 12:48p",
+  "release": 7,
+  "sha": "c9ffd6d",
+  "fullSha": "c9ffd6d68efe6a45353eed9139c14d16f6cf41e1",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T14:45:20+02:00",
-  "commits": [{"sha":"9e8252c","message":"Rebrand AlpacAPPs -> anageneral across UI; remove tagline","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T14:47:51+02:00",
+  "commits": [{"sha":"c9ffd6d","message":"Add Sign In link to homepage","author":"AnastasiaBordiuh"}]
 }
