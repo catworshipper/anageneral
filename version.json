@@ -1,12 +1,12 @@
 {
-  "version": "v260626.07 12:48p",
-  "release": 7,
-  "sha": "c9ffd6d",
-  "fullSha": "c9ffd6d68efe6a45353eed9139c14d16f6cf41e1",
+  "version": "v260626.08 12:50p",
+  "release": 8,
+  "sha": "138ba32",
+  "fullSha": "138ba32e23e4e2930563a7e8e7b59b2cad51b859",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T14:47:51+02:00",
-  "commits": [{"sha":"c9ffd6d","message":"Add Sign In link to homepage","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T14:50:24+02:00",
+  "commits": [{"sha":"138ba32","message":"Add public docs page at /docs/","author":"AnastasiaBordiuh"}]
 }
