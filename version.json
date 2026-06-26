@@ -1,12 +1,12 @@
 {
-  "version": "v260626.05 12:42p",
-  "release": 5,
-  "sha": "9bc7660",
-  "fullSha": "9bc7660b3e3e7a95e8a01d8fd87d2d3ccf9a213e",
+  "version": "v260626.06 12:45p",
+  "release": 6,
+  "sha": "9e8252c",
+  "fullSha": "9e8252c8f91818ce088b757fceb94173bb7fcf57",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T14:42:40+02:00",
-  "commits": [{"sha":"9bc7660","message":"Add vendored supabase-js 2.39.3","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T14:45:20+02:00",
+  "commits": [{"sha":"9e8252c","message":"Rebrand AlpacAPPs -> anageneral across UI; remove tagline","author":"AnastasiaBordiuh"}]
 }
