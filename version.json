@@ -1,12 +1,12 @@
 {
-  "version": "v260626.09 12:52p",
-  "release": 9,
-  "sha": "d1f3c13",
-  "fullSha": "d1f3c13328c4bdd159def2ced5ee4c9bc9171e3a",
+  "version": "v260626.10 1:14p",
+  "release": 10,
+  "sha": "898d2d1",
+  "fullSha": "898d2d151ae25e8cd0908da78efebd3564f9bf6d",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T14:52:19+02:00",
-  "commits": [{"sha":"d1f3c13","message":"Add staff-protected internal docs page at /indocs/","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T15:13:58+02:00",
+  "commits": [{"sha":"898d2d1","message":"Add Senior QA Manager candidate ranking report; set domain to topwebweb.com","author":"AnastasiaBordiuh"}]
 }
