@@ -1,12 +1,12 @@
 {
-  "version": "v260626.08 12:50p",
-  "release": 8,
-  "sha": "138ba32",
-  "fullSha": "138ba32e23e4e2930563a7e8e7b59b2cad51b859",
+  "version": "v260626.09 12:52p",
+  "release": 9,
+  "sha": "d1f3c13",
+  "fullSha": "d1f3c13328c4bdd159def2ced5ee4c9bc9171e3a",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T14:50:24+02:00",
-  "commits": [{"sha":"138ba32","message":"Add public docs page at /docs/","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T14:52:19+02:00",
+  "commits": [{"sha":"d1f3c13","message":"Add staff-protected internal docs page at /indocs/","author":"AnastasiaBordiuh"}]
 }
