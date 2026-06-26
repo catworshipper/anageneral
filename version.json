@@ -1,12 +1,12 @@
 {
-  "version": "v260626.01 10:53a",
-  "release": 1,
-  "sha": "b9cf8ad",
-  "fullSha": "b9cf8adc8d168f2cd4cb5deac530482afdc5b204",
+  "version": "v260626.02 11:04a",
+  "release": 2,
+  "sha": "0981018",
+  "fullSha": "0981018c2e1ebde409b5f4e231f18fe8d5cb8b2f",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T12:52:55+02:00",
-  "commits": []
+  "pushedAt": "2026-06-26T13:04:17+02:00",
+  "commits": [{"sha":"0981018","message":"Remove node_modules from tracking","author":"AnastasiaBordiuh"}]
 }
