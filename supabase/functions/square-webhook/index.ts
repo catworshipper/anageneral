@@ -26,7 +26,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-square-hmacsha256-signature'
 };
 
-const PAYMENTS_EMAIL = 'payments@YOUR_DOMAIN';
+const PAYMENTS_EMAIL = 'payments@topwebweb.com';
 
 interface SquareWebhookEvent {
   merchant_id: string;
@@ -185,7 +185,7 @@ async function sendPaymentStatusEmail(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property System <auto@YOUR_DOMAIN>',
+        from: 'Property System <auto@topwebweb.com>',
         to: [PAYMENTS_EMAIL],
         subject,
         html,

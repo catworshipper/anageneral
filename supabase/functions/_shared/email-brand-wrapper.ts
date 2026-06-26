@@ -249,7 +249,7 @@ export async function wrapEmailHtml(
       <td style="padding:20px ${e.body.padding} 8px;font-family:${fontFamily};">
         <div style="background:${c.background_muted};border:1px solid ${c.border};border-radius:8px;padding:16px 20px;text-align:center;">
           <p style="margin:0 0 10px;color:${c.text};font-size:14px;font-weight:600;">Any questions or feedback?</p>
-          <a href="mailto:pai@YOUR_DOMAIN?subject=${feedbackSubject}" style="display:inline-block;background:${accent};color:#ffffff;padding:10px 24px;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;font-family:${fontFamily};">Send PAI a Message</a>
+          <a href="mailto:pai@topwebweb.com?subject=${feedbackSubject}" style="display:inline-block;background:${accent};color:#ffffff;padding:10px 24px;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;font-family:${fontFamily};">Send PAI a Message</a>
           <p style="margin:10px 0 0;color:${c.text_muted};font-size:12px;">Or just reply to this email</p>
         </div>
       </td>

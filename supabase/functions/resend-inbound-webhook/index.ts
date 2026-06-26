@@ -57,12 +57,12 @@ async function loadForwardingRules(supabase: any): Promise<Record<string, string
   } catch (err) {
     console.error("Failed to load forwarding rules from DB, using defaults:", err);
     return {
-      team: ["admin@YOUR_DOMAIN"],
+      team: ["admin@topwebweb.com"],
     };
   }
 }
 
-const DEFAULT_FORWARD_TO = "admin@YOUR_DOMAIN";
+const DEFAULT_FORWARD_TO = "admin@topwebweb.com";
 
 /**
  * Extract the local part (prefix) from an email address.
@@ -183,7 +183,7 @@ async function forwardEmail(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: `${originalFrom.replace(/<.*>/, '').trim() || originalFrom} <notifications@YOUR_DOMAIN>`,
+        from: `${originalFrom.replace(/<.*>/, '').trim() || originalFrom} <notifications@topwebweb.com>`,
         to: [to],
         reply_to: originalFrom,
         subject: subject,
@@ -231,7 +231,7 @@ async function handleSpecialLogic(
   } else if (type === "claudero") {
     await handleClauderoEmail(emailRecord, supabase, resendApiKey);
   } else if (type === "ai-admin") {
-    await handleAI AdminEmail(emailRecord, supabase, resendApiKey);
+    await handleAIAdminEmail(emailRecord, supabase, resendApiKey);
   } else if (type === "guestbook") {
     await handleGuestbookEmail(emailRecord, supabase);
   } else if (type === "herd") {
@@ -244,7 +244,7 @@ async function handleSpecialLogic(
 // =============================================
 
 /**
- * Handle inbound emails to herd@YOUR_DOMAIN.
+ * Handle inbound emails to herd@topwebweb.com.
  * Uses the dual-model classifier to determine what to do with the email,
  * then routes accordingly.
  */
@@ -371,7 +371,7 @@ async function routeByClassification(
       // Try to find the person by the to-address prefix
       const prefix = extractPrefix(emailRecord.to_address || "");
       const forwardingRules = await loadForwardingRules(supabase);
-      const targets = forwardingRules[prefix] || ["admin@YOUR_DOMAIN"];
+      const targets = forwardingRules[prefix] || ["admin@topwebweb.com"];
 
       for (const target of targets) {
         await forwardEmail(resendApiKey, target, from, subject, bodyHtml, bodyText);
@@ -404,12 +404,12 @@ async function routeByClassification(
         <div>${bodyHtml || `<pre>${bodyText}</pre>`}</div>
       `;
 
-      await forwardEmail(resendApiKey, "admin@YOUR_DOMAIN", from, flagSubject, flagHtml, bodyText);
+      await forwardEmail(resendApiKey, "admin@topwebweb.com", from, flagSubject, flagHtml, bodyText);
       await supabase
         .from("inbound_emails")
         .update({
           route_action: "flagged_review",
-          forwarded_to: "admin@YOUR_DOMAIN",
+          forwarded_to: "admin@topwebweb.com",
           forwarded_at: new Date().toISOString(),
         })
         .eq("id", emailRecord.id);
@@ -418,12 +418,12 @@ async function routeByClassification(
     case "forward_admin":
     default:
       // Forward to admin
-      await forwardEmail(resendApiKey, "admin@YOUR_DOMAIN", from, subject, bodyHtml, bodyText);
+      await forwardEmail(resendApiKey, "admin@topwebweb.com", from, subject, bodyHtml, bodyText);
       await supabase
         .from("inbound_emails")
         .update({
           route_action: "forward",
-          forwarded_to: "admin@YOUR_DOMAIN",
+          forwarded_to: "admin@topwebweb.com",
           forwarded_at: new Date().toISOString(),
         })
         .eq("id", emailRecord.id);
@@ -436,7 +436,7 @@ async function routeByClassification(
 // =============================================
 
 /**
- * Handle inbound emails to guestbook@YOUR_DOMAIN.
+ * Handle inbound emails to guestbook@topwebweb.com.
  * Extracts sender name and message body, inserts into guestbook_entries.
  */
 async function handleGuestbookEmail(
@@ -473,7 +473,7 @@ async function handleGuestbookEmail(
 // =============================================
 
 /**
- * Handle inbound emails to claudero@YOUR_DOMAIN.
+ * Handle inbound emails to claudero@topwebweb.com.
  * These are replies to feature build result emails.
  *
  * 1. Scan subject + body for version pattern (vYYMMDD.NN) or feature request context
@@ -631,7 +631,7 @@ async function handleClauderoEmail(
 }
 
 /**
- * Send a reply from claudero@YOUR_DOMAIN via Resend API directly.
+ * Send a reply from claudero@topwebweb.com via Resend API directly.
  */
 async function sendClauderoReply(
   resendApiKey: string,
@@ -675,9 +675,9 @@ This is an automated reply from Claudero at YOUR_PROPERTY_NAME.`;
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Claudero <claudero@YOUR_DOMAIN>",
+      from: "Claudero <claudero@topwebweb.com>",
       to: [to],
-      reply_to: "claudero@YOUR_DOMAIN",
+      reply_to: "claudero@topwebweb.com",
       subject: reSubject,
       html,
       text,
@@ -825,7 +825,7 @@ async function checkSpamThresholdAndAlert(
         .from("app_users")
         .select("email")
         .eq("role", "admin");
-      const adminEmails = admins?.map((a: any) => a.email) || ["admin@YOUR_DOMAIN"];
+      const adminEmails = admins?.map((a: any) => a.email) || ["admin@topwebweb.com"];
 
       await fetch(`${supabaseUrl}/functions/v1/send-email`, {
         method: "POST",
@@ -837,7 +837,7 @@ async function checkSpamThresholdAndAlert(
           type: "pai_email_reply",
           to: adminEmails,
           data: {
-            reply_body: `<strong>Spam Alert:</strong> pai@YOUR_DOMAIN has received <strong>${spamCount} spam emails</strong> in the last ${PAI_SPAM_WINDOW_HOURS} hours.\n\nMost recent: from ${senderEmail} — "${summary}"\n\nAll spam is being silently dropped (no replies sent). If this continues, consider removing the address from public-facing pages or adding domain-level filtering.`,
+            reply_body: `<strong>Spam Alert:</strong> pai@topwebweb.com has received <strong>${spamCount} spam emails</strong> in the last ${PAI_SPAM_WINDOW_HOURS} hours.\n\nMost recent: from ${senderEmail} — "${summary}"\n\nAll spam is being silently dropped (no replies sent). If this continues, consider removing the address from public-facing pages or adding domain-level filtering.`,
             original_subject: "PAI Spam Alert",
             original_body: "",
           },
@@ -886,8 +886,8 @@ async function sendPaiReply(
           body: JSON.stringify({
             type: "pai_email_reply",
             to: to,
-            from: "PAI <pai@YOUR_DOMAIN>",
-            reply_to: "pai@YOUR_DOMAIN",
+            from: "PAI <pai@topwebweb.com>",
+            reply_to: "pai@topwebweb.com",
             data: {
               reply_body: replyBody,
               original_subject: originalSubject,
@@ -943,9 +943,9 @@ This is an automated reply from PAI at YOUR_PROPERTY_NAME.`;
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "PAI <pai@YOUR_DOMAIN>",
+      from: "PAI <pai@topwebweb.com>",
       to: [to],
-      reply_to: "pai@YOUR_DOMAIN",
+      reply_to: "pai@topwebweb.com",
       subject,
       html,
       text,
@@ -964,7 +964,7 @@ This is an automated reply from PAI at YOUR_PROPERTY_NAME.`;
 /**
  * Send a reply email from AlpaClaw.
  */
-async function sendAI AdminReply(
+async function sendAIAdminReply(
   resendApiKey: string,
   to: string,
   replyBody: string,
@@ -1006,9 +1006,9 @@ This is an automated reply from AlpaClaw at YOUR_PROPERTY_NAME.`;
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "AlpaClaw <ai-admin@YOUR_DOMAIN>",
+      from: "AlpaClaw <ai-admin@topwebweb.com>",
       to: [to],
-      reply_to: "ai-admin@YOUR_DOMAIN",
+      reply_to: "ai-admin@topwebweb.com",
       subject,
       html,
       text,
@@ -1029,13 +1029,13 @@ This is an automated reply from AlpaClaw at YOUR_PROPERTY_NAME.`;
 // =============================================
 
 /**
- * Handle inbound email to ai-admin@YOUR_DOMAIN.
+ * Handle inbound email to ai-admin@topwebweb.com.
  *
  * Routes to PAI edge function with context.source = "ai-admin-email"
  * so that the ai-admin_addendum (AlpaClaw personality) is injected.
  * Sends reply back via email from ai-admin@.
  */
-async function handleAI AdminEmail(
+async function handleAIAdminEmail(
   emailRecord: any,
   supabase: any,
   resendApiKey: string
@@ -1079,7 +1079,7 @@ async function handleAI AdminEmail(
       replyText = `Thank you for your email! I've received your message and I'll do my best to help.\n\nFor faster responses, you can also chat with me on Discord at the Alpacord server, or visit https://YOUR_DOMAIN/residents/ (requires resident login).`;
     }
 
-    const sendResult = await sendAI AdminReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
+    const sendResult = await sendAIAdminReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
     await supabase.from("api_usage_log").insert({
       vendor: "supabase",
       category: "ai-admin_email_reply_attempt",
@@ -1105,7 +1105,7 @@ async function handleAI AdminEmail(
     }
   } catch (err) {
     console.error(`AlpaClaw response error: ${err.message}`);
-    const sendResult = await sendAI AdminReply(
+    const sendResult = await sendAIAdminReply(
       resendApiKey,
       senderEmail,
       "Thank you for your email! I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can reach us on Discord or at https://YOUR_DOMAIN/residents/.",
@@ -1140,7 +1140,7 @@ async function sendPaiDocumentNotification(
     .select("email")
     .eq("role", "admin");
 
-  const adminEmails = admins?.map((a: any) => a.email) || ["admin@YOUR_DOMAIN"];
+  const adminEmails = admins?.map((a: any) => a.email) || ["admin@topwebweb.com"];
 
   const res = await fetch(`${supabaseUrl}/functions/v1/send-email`, {
     method: "POST",
@@ -1237,7 +1237,7 @@ function looksLikeQuestion(subject: string, body: string): boolean {
 }
 
 /**
- * Handle inbound email to pai@YOUR_DOMAIN.
+ * Handle inbound email to pai@topwebweb.com.
  *
  * 1. Classify via Gemini (question/document/command/other)
  * 2. Questions & commands → forward to PAI chat, send reply email
@@ -1620,7 +1620,7 @@ async function handlePaiEmail(
     console.log(`PAI email classified as 'other', forwarding to admin`);
     // Just forward — the normal forwarding logic handles this since we don't set forwardTargets for special logic
     // But since special logic handlers don't forward by default, let's manually forward
-    const adminEmail = "admin@YOUR_DOMAIN";
+    const adminEmail = "admin@topwebweb.com";
     const forwardRes = await fetch(`${RESEND_API_URL}/emails`, {
       method: "POST",
       headers: {
@@ -1628,7 +1628,7 @@ async function handlePaiEmail(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: `PAI Forward <notifications@YOUR_DOMAIN>`,
+        from: `PAI Forward <notifications@topwebweb.com>`,
         to: [adminEmail],
         reply_to: senderEmail,
         subject: `[PAI Forward] ${subject}`,
@@ -1917,7 +1917,7 @@ async function handleOutboundZellePayment(
   }
 
   // Notify admin
-  const adminEmail = "team@YOUR_DOMAIN";
+  const adminEmail = "team@topwebweb.com";
   const categoryLabel = category === "associate_payment" ? "Contractor Payment" : category === "refund" ? "Refund" : category === "merchandise" ? "Merchandise/Supplies" : "Other (verify)";
   const subject = `Outbound Zelle Recorded: $${outbound.amount.toFixed(2)} to ${personName}${outbound.memo ? ` — ${outbound.memo}` : ""}`;
   const html = `
@@ -1944,8 +1944,8 @@ async function handleOutboundZellePayment(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Alpaca Payments <pai@YOUR_DOMAIN>",
-        reply_to: "pai@YOUR_DOMAIN",
+        from: "Alpaca Payments <pai@topwebweb.com>",
+        reply_to: "pai@topwebweb.com",
         to: [adminEmail],
         subject,
         html,
@@ -2623,10 +2623,10 @@ async function sendTenantReceipt(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Alpaca Payments <pai@YOUR_DOMAIN>",
-        reply_to: "pai@YOUR_DOMAIN",
+        from: "Alpaca Payments <pai@topwebweb.com>",
+        reply_to: "pai@topwebweb.com",
         to: [details.tenantEmail],
-        bcc: ["automation@YOUR_DOMAIN"],
+        bcc: ["automation@topwebweb.com"],
         subject,
         html,
       }),
@@ -2720,7 +2720,7 @@ async function sendPaymentNotification(
   type: string,
   details: any
 ): Promise<void> {
-  const adminEmail = "team@YOUR_DOMAIN";
+  const adminEmail = "team@topwebweb.com";
   const { parsed, personName, applicationId } = details;
   const adminUrl = `https://YOUR_DOMAIN/spaces/admin/rentals.html#applicant=${applicationId}`;
 
@@ -2826,8 +2826,8 @@ async function sendPaymentNotification(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Alpaca Payments <pai@YOUR_DOMAIN>",
-        reply_to: "pai@YOUR_DOMAIN",
+        from: "Alpaca Payments <pai@topwebweb.com>",
+        reply_to: "pai@topwebweb.com",
         to: [adminEmail],
         subject,
         html,
@@ -2882,14 +2882,14 @@ async function handlePaymentEmail(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Alpaca Payments <pai@YOUR_DOMAIN>",
-          reply_to: "pai@YOUR_DOMAIN",
-          to: ["admin@YOUR_DOMAIN"],
+          from: "Alpaca Payments <pai@topwebweb.com>",
+          reply_to: "pai@topwebweb.com",
+          to: ["admin@topwebweb.com"],
           subject: `Unrecognized payment email: ${subject}`,
           html: `
             <div style="font-family:-apple-system,sans-serif;max-width:600px;">
               <h2 style="color:#e67e22;">&#x26A0;&#xFE0F; Unrecognized Payment Email</h2>
-              <p>A forwarded email to <strong>payments@YOUR_DOMAIN</strong> could not be automatically classified as Zelle, PayPal, or any known payment format.</p>
+              <p>A forwarded email to <strong>payments@topwebweb.com</strong> could not be automatically classified as Zelle, PayPal, or any known payment format.</p>
               <p><strong>Original subject:</strong> ${subject}</p>
               <p><strong>From:</strong> ${emailRecord.from_address || "unknown"}</p>
               <hr style="border:none;border-top:1px solid #eee;margin:16px 0;">
@@ -3238,8 +3238,8 @@ async function handleAutoReply(
   const fromEmail = (from.match(/<(.+)>/)?.[1] || from).toLowerCase().trim();
   const toEmail = (toAddr.match(/<(.+)>/)?.[1] || toAddr).toLowerCase().trim();
 
-  if (fromEmail.includes("auto@YOUR_DOMAIN") || fromEmail.includes("noreply@YOUR_DOMAIN") ||
-      toEmail.includes("auto@YOUR_DOMAIN") || toEmail.includes("noreply@YOUR_DOMAIN")) {
+  if (fromEmail.includes("auto@topwebweb.com") || fromEmail.includes("noreply@topwebweb.com") ||
+      toEmail.includes("auto@topwebweb.com") || toEmail.includes("noreply@topwebweb.com")) {
     console.log("Ignoring automated email reply loop", { from: fromEmail, to: toEmail });
     return;
   }
@@ -3421,7 +3421,7 @@ serve(async (req) => {
     // ==============================================
     const fromLower = from.toLowerCase();
     const fromAddr = (fromLower.match(/<(.+)>/)?.[1] || fromLower).trim();
-    if (fromAddr.endsWith("@YOUR_DOMAIN")) {
+    if (fromAddr.endsWith("@topwebweb.com")) {
       const toAutoOrNoreply = toList.some(t => {
         const p = extractPrefix(t);
         return p === "auto" || p === "noreply" || p === "pai" || p === "ai-admin";

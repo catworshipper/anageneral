@@ -1,7 +1,7 @@
 /**
  * Payment & Contract Overdue Check
  * Detects overdue rent, event payments, AND unsigned rental contracts.
- * Sends escalating reminders to the payer + CC team@YOUR_DOMAIN.
+ * Sends escalating reminders to the payer + CC team@topwebweb.com.
  *
  * Escalation: day 1 (friendly), day 3 (firm), day 5 (persistent), day 7+ (urgent)
  *
@@ -17,7 +17,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const TEAM_EMAIL = 'team@YOUR_DOMAIN';
+const TEAM_EMAIL = 'team@topwebweb.com';
 const ESCALATION_DAYS = [1, 3, 5, 7]; // days after due date
 const PAY_BASE_URL = 'https://YOUR_DOMAIN/pay/';
 
@@ -888,10 +888,10 @@ YOUR_PROPERTY_NAME`;
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            from: 'Property Team <team@YOUR_DOMAIN>',
+            from: 'Property Team <team@topwebweb.com>',
             to: [first.personEmail],
             cc: [TEAM_EMAIL],
-            reply_to: 'team@YOUR_DOMAIN',
+            reply_to: 'team@topwebweb.com',
             subject,
             html: emailHtml,
             text: emailText,
@@ -962,10 +962,10 @@ YOUR_PROPERTY_NAME`;
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              from: 'Property Team <team@YOUR_DOMAIN>',
+              from: 'Property Team <team@topwebweb.com>',
               to: [item.personEmail],
               cc: [TEAM_EMAIL],
-              reply_to: 'team@YOUR_DOMAIN',
+              reply_to: 'team@topwebweb.com',
               subject,
               html,
               text,
@@ -1141,7 +1141,7 @@ YOUR_PROPERTY_NAME`;
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            from: 'Property System <auto@YOUR_DOMAIN>',
+            from: 'Property System <auto@topwebweb.com>',
             to: [TEAM_EMAIL],
             subject: digestSubject,
             html: digestHtml,

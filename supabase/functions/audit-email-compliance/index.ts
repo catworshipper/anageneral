@@ -44,11 +44,11 @@ serve(async (_req) => {
         details: `SENDER_MAP["${key}"].from = "${val.from}" — expected to start with "${expectedSenderName}"`,
       });
     }
-    if (val.reply_to !== "pai@YOUR_DOMAIN") {
+    if (val.reply_to !== "pai@topwebweb.com") {
       violations.push({
         rule: 1,
         ruleName: "Reply-To",
-        details: `SENDER_MAP["${key}"].reply_to = "${val.reply_to}" — expected "pai@YOUR_DOMAIN"`,
+        details: `SENDER_MAP["${key}"].reply_to = "${val.reply_to}" — expected "pai@topwebweb.com"`,
       });
     }
   }
@@ -190,8 +190,8 @@ serve(async (_req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-        to: ["admin@YOUR_DOMAIN"],
+        from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+        to: ["admin@topwebweb.com"],
         subject: `[Audit] Email Compliance — ${violations.length} issue(s)`,
         html: alertHtml,
         text: violations.map(v => `Rule ${v.rule} (${v.ruleName}): ${v.details}`).join("\n"),

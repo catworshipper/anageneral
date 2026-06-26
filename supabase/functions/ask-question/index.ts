@@ -34,7 +34,7 @@ function buildContextPrompt(contextData: ContextData): string {
   // Add general info
   parts.push(`GENERAL INFO:
 - Location: 123 Main Stive, Your City, TX 00000 (30 minutes east of Austin)
-- Contact: team@YOUR_DOMAIN
+- Contact: team@topwebweb.com
 - Website: YOUR_DOMAIN`);
 
   // Add spaces info

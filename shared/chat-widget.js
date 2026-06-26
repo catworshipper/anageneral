@@ -107,7 +107,7 @@ async function sendAdminNotification(question, userEmail) {
       },
       body: JSON.stringify({
         type: 'faq_unanswered',
-        to: 'admin@YOUR_DOMAIN',
+        to: 'admin@topwebweb.com',
         data: {
           question,
           user_email: userEmail || 'Not provided',

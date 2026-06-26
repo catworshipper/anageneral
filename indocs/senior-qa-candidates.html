@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senior QA Manager — Candidate Ranking · Internal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e2dc;
+      --accent: #3d8b7a;
+      --accent-soft: #e7f1ee;
+      --green: #2f9e6f;
+      --amber: #c98a1b;
+      --red: #c2553f;
+      --gray: #9ca3af;
+      --shadow: 0 1px 2px rgba(26,26,46,0.04), 0 8px 24px rgba(26,26,46,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    body:not(.ready) .wrap { display: none; }
+    .loading {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 0.95rem;
+    }
+    body.ready .loading { display: none; }
+
+    .wrap { max-width: 920px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+    .badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      border-radius: 999px; padding: 0.2rem 0.7rem; margin-bottom: 1.1rem;
+    }
+    h1 { font-size: 2.3rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.4rem; }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.4rem; font-size: 1.02rem; }
+    .meta-line { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2.4rem; }
+
+    h2 {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
+      margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 .num {
+      color: var(--accent); font-weight: 700; margin-right: 0.5rem;
+    }
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); }
+
+    /* ---- TL;DR callout ---- */
+    .tldr {
+      background: var(--accent-soft);
+      border: 1px solid #cfe4de;
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .tldr h3 { font-size: 0.95rem; margin-bottom: 0.6rem; color: var(--accent); }
+    .tldr p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+    .tldr p:last-child { margin-bottom: 0; }
+    .tldr strong { color: var(--text); }
+
+    /* ---- Leaderboard ---- */
+    .board { display: flex; flex-direction: column; gap: 0.7rem; }
+    .row {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr 7.5rem 3.2rem;
+      align-items: center;
+      gap: 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      box-shadow: var(--shadow);
+    }
+    .rank { font-size: 1.25rem; font-weight: 700; color: var(--text-muted); text-align: center; }
+    .row.top1 { border-color: #bfe0d6; }
+    .row.top1 .rank { color: var(--green); }
+    .cand-name { font-weight: 650; font-size: 1rem; }
+    .cand-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.05rem; }
+    .bar-wrap { background: var(--border); border-radius: 999px; height: 9px; overflow: hidden; }
+    .bar { height: 100%; border-radius: 999px; background: var(--accent); }
+    .bar.g { background: var(--green); }
+    .bar.a { background: var(--amber); }
+    .bar.r { background: var(--red); }
+    .score { font-weight: 700; font-size: 1.05rem; text-align: right; }
+    .score small { font-weight: 500; font-size: 0.7rem; color: var(--text-muted); }
+
+    .tier-tag {
+      display: inline-block; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.12rem 0.5rem; border-radius: 6px; margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .t-strong { background: #e3f4ec; color: var(--green); }
+    .t-promising { background: #fdf2dc; color: var(--amber); }
+    .t-no { background: #fbe7e2; color: var(--red); }
+    .t-pending { background: #eef0f2; color: var(--gray); }
+
+    /* ---- Criteria table ---- */
+    .crit-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .crit-table th, .crit-table td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+    .crit-table th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+    .crit-table td.w { font-weight: 700; color: var(--accent); white-space: nowrap; }
+
+    /* ---- Candidate cards ---- */
+    .cards { display: flex; flex-direction: column; gap: 1.1rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+    .card-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.2rem; }
+    .card-head h3 { font-size: 1.15rem; font-weight: 700; }
+    .card-rank { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+    .facts { display: flex; flex-wrap: wrap; gap: 0.4rem 0.75rem; font-size: 0.82rem; color: var(--text-muted); margin: 0.5rem 0 0.9rem; }
+    .facts span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .facts b { color: var(--text); font-weight: 600; }
+
+    .flags { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.6rem; }
+    @media (max-width: 600px) { .flags { grid-template-columns: 1fr; } }
+    .flag-col h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+    .flag-col.green h4 { color: var(--green); }
+    .flag-col.red h4 { color: var(--red); }
+    .flag-col ul { list-style: none; }
+    .flag-col li { font-size: 0.86rem; padding-left: 1.1rem; position: relative; margin-bottom: 0.3rem; }
+    .flag-col.green li::before { content: "▲"; position: absolute; left: 0; color: var(--green); font-size: 0.62rem; top: 0.28rem; }
+    .flag-col.red li::before { content: "▼"; position: absolute; left: 0; color: var(--red); font-size: 0.62rem; top: 0.28rem; }
+
+    .verdict {
+      margin-top: 0.9rem; padding: 0.7rem 0.9rem; border-radius: 9px;
+      font-size: 0.88rem; background: #f7f5f1; border-left: 3px solid var(--accent);
+    }
+    .verdict.no { border-left-color: var(--red); }
+    .verdict.maybe { border-left-color: var(--amber); }
+
+    .links { margin-top: 0.8rem; font-size: 0.82rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
+
+    .legend { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; }
+    .legend b { color: var(--text); }
+    .note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
+
+    .back { display: inline-block; margin-top: 3rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .back:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+  <span data-site-version style="display:none;"></span>
+
+  <div class="loading">Checking access…</div>
+
+  <div class="wrap">
+    <span class="badge">Internal · Hiring</span>
+    <h1>Senior QA Manager — Candidate Ranking</h1>
+    <p class="subtitle">Shortlist scored against the Networked Senior QA Manager job spec.</p>
+    <p class="meta-line">9 candidates assessed · Reports to CTO · Remote (pref. Eastern Europe) · Scoring derived from recruiter screening notes &amp; call recordings.</p>
+
+    <div class="tldr">
+      <h3>▸ Bottom line</h3>
+      <p><strong>Alex Khomenko</strong> is the standout: AI strategy authorship, lead + mobile depth, hands-on, strong comms — and based in Poland, matching the Eastern-Europe preference at a sensible 80k.</p>
+      <p><strong>Catalin Faur</strong> and <strong>Katsiaryna Rabtsava</strong> are a near-tie for the runner-up slot. Catalin wins on location (Romania/EE) + salary; Katsiaryna wins on confirmed comms + mentorship and was already interviewed. <strong>Prashant Vaghela</strong> is strong but the most expensive (115k) and outside EE.</p>
+      <p><strong>Hasnat Ahmed</strong> is a promising AI-native talent but lacks real lead experience — a better fit for the junior–mid seat than the manager role.</p>
+    </div>
+
+    <!-- ============ LEADERBOARD ============ -->
+    <h2><span class="num">01</span>Ranked shortlist</h2>
+    <div class="board">
+
+      <div class="row top1">
+        <div class="rank">1</div>
+        <div>
+          <div class="cand-name">Alex Khomenko <span class="tier-tag t-strong">Strong fit</span></div>
+          <div class="cand-sub">Lead QA · Poland · 80k · created AI strategies, hands-on lead</div>
+        </div>
+        <div class="bar-wrap"><div class="bar g" style="width:97%"></div></div>
+        <div class="score">97<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">2</div>
+        <div>
+          <div class="cand-name">Catalin Faur <span class="tier-tag t-strong">Strong fit</span></div>
+          <div class="cand-sub">Lead QA · Romania · 85k · strong lead, AI-focused · ⚠ non-responsive</div>
+        </div>
+        <div class="bar-wrap"><div class="bar g" style="width:88%"></div></div>
+        <div class="score">88<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">3</div>
+        <div>
+          <div class="cand-name">Katsiaryna Rabtsava <span class="tier-tag t-strong">Strong fit</span></div>
+          <div class="cand-sub">Lead QA · Canada · 110k · AI-focused, mentorship, good comms</div>
+        </div>
+        <div class="bar-wrap"><div class="bar g" style="width:88%"></div></div>
+        <div class="score">88<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">4</div>
+        <div>
+          <div class="cand-name">Prashant Vaghela <span class="tier-tag t-strong">Strong fit</span></div>
+          <div class="cand-sub">Lead QA · Canada · 115k · strong lead + mobile, AI-focused</div>
+        </div>
+        <div class="bar-wrap"><div class="bar g" style="width:85%"></div></div>
+        <div class="score">85<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">5</div>
+        <div>
+          <div class="cand-name">Hasnat Ahmed <span class="tier-tag t-promising">Promising</span></div>
+          <div class="cand-sub">Support QA · Ireland · 60k · AI-native, ownership · no lead exp.</div>
+        </div>
+        <div class="bar-wrap"><div class="bar a" style="width:72%"></div></div>
+        <div class="score">72<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">6</div>
+        <div>
+          <div class="cand-name">Bushra Banu <span class="tier-tag t-promising">Consider</span></div>
+          <div class="cand-sub">Support QA · Ireland · — · strong mobile · no lead / no E2E strategy</div>
+        </div>
+        <div class="bar-wrap"><div class="bar a" style="width:51%"></div></div>
+        <div class="score">51<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">7</div>
+        <div>
+          <div class="cand-name">Alona Flomin <span class="tier-tag t-no">Not for lead</span></div>
+          <div class="cand-sub">Lead QA · Canada · 73–84k · diligent · unclear comms, senior≠lead</div>
+        </div>
+        <div class="bar-wrap"><div class="bar r" style="width:39%"></div></div>
+        <div class="score">39<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">8</div>
+        <div>
+          <div class="cand-name">Giulia Natoli <span class="tier-tag t-no">Not aligned</span></div>
+          <div class="cand-sub">Lead QA · Ireland · 75–80k · no lead exp., not deep in AI</div>
+        </div>
+        <div class="bar-wrap"><div class="bar r" style="width:33%"></div></div>
+        <div class="score">33<small>/100</small></div>
+      </div>
+
+      <div class="row">
+        <div class="rank">—</div>
+        <div>
+          <div class="cand-name">Shweta Patel <span class="tier-tag t-pending">Pending</span></div>
+          <div class="cand-sub">Lead QA · Canada · rescheduled 2× · insufficient data to score</div>
+        </div>
+        <div class="bar-wrap"><div class="bar" style="width:0%"></div></div>
+        <div class="score" style="color:var(--gray)">—</div>
+      </div>
+
+    </div>
+    <p class="legend" style="margin-top:0.9rem;"><b>Tiers:</b>
+      <span style="color:var(--green)">Strong fit</span> (85+) ·
+      <span style="color:var(--amber)">Promising / Consider</span> (50–75) ·
+      <span style="color:var(--red)">Not aligned</span> (&lt;50) ·
+      <span style="color:var(--gray)">Pending</span> (no data)</p>
+
+    <!-- ============ SCORING MODEL ============ -->
+    <h2><span class="num">02</span>How candidates were scored</h2>
+    <p class="note">Weighted against the seven requirements that define this role per the job description. Each candidate scored 0–5 per criterion (from screening notes), normalized to 100.</p>
+    <table class="crit-table">
+      <thead>
+        <tr><th>Criterion</th><th>Weight</th><th>Why it matters for this role</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Lead / manager experience</td><td class="w">25%</td><td>Must own the QA function &amp; set the bar while staying hands-on.</td></tr>
+        <tr><td>AI-assisted QA</td><td class="w">20%</td><td>Explicitly named the <em>priority for this year</em>.</td></tr>
+        <tr><td>Hands-on testing &amp; automation</td><td class="w">15%</td><td>Personally owns deep testing of critical / high-risk modules.</td></tr>
+        <tr><td>Communication (incl. escalations)</td><td class="w">15%</td><td>QA face on sensitive customer escalations; protects brand trust.</td></tr>
+        <tr><td>Mentorship / team</td><td class="w">10%</td><td>Mentors the existing junior–mid QA teammate.</td></tr>
+        <tr><td>Location fit (Remote, pref. EE)</td><td class="w">10%</td><td>Spec states remote, <em>preferably Eastern Europe</em> (timezone).</td></tr>
+        <tr><td>Compensation fit</td><td class="w">5%</td><td>Early-stage budget sensitivity.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============ DETAIL CARDS ============ -->
+    <h2><span class="num">03</span>Candidate detail</h2>
+    <div class="cards">
+
+      <!-- ALEX -->
+      <div class="card">
+        <div class="card-head"><h3>Alex Khomenko <span class="tier-tag t-strong">Strong fit · #1</span></h3><span class="card-rank">Score 97 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Poland</b> (EE ✓)</span><span>💼 <b>Lead QA</b></span><span>💰 <b>80k</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>Has personally created AI QA strategies — directly hits the year's priority</li>
+            <li>Strong mobile-app + lead experience</li>
+            <li>Hands-on (won't stop testing as a manager)</li>
+            <li>Good communication + personality in screen</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li>None significant flagged</li>
+          </ul></div>
+        </div>
+        <div class="verdict"><b>Verdict:</b> The cleanest match to the spec — lead authority, AI fluency, hands-on depth, and the preferred Eastern-Europe timezone at a reasonable rate. Move to final round first.</div>
+        <div class="links"><a href="https://www.linkedin.com/in/reirenar/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </div>
+
+      <!-- CATALIN -->
+      <div class="card">
+        <div class="card-head"><h3>Catalin Faur <span class="tier-tag t-strong">Strong fit · #2</span></h3><span class="card-rank">Score 88 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Romania</b> (EE ✓)</span><span>💼 <b>Lead QA</b></span><span>💰 <b>85k</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>Strong lead experience</li>
+            <li>AI-focused approach to QA</li>
+            <li>Eastern-Europe location — exact spec preference</li>
+            <li>Salary in budget band</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li><b>Non-responsive</b> during scheduling — process risk &amp; possible signal on availability/interest</li>
+            <li>Comms not yet observed on a call</li>
+          </ul></div>
+        </div>
+        <div class="verdict"><b>Verdict:</b> Excellent on-paper fit and the best location/cost profile after Alex — <em>if</em> he re-engages. Prioritize getting him on a call to confirm communication before ranking ahead of Katsiaryna.</div>
+        <div class="links"><a href="https://www.linkedin.com/in/c%C4%83t%C4%83lin-faur-94427015a/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </div>
+
+      <!-- KATSIARYNA -->
+      <div class="card">
+        <div class="card-head"><h3>Katsiaryna Rabtsava <span class="tier-tag t-strong">Strong fit · #3</span></h3><span class="card-rank">Score 88 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Canada</b> (non-EE)</span><span>💼 <b>Lead QA</b></span><span>💰 <b>110k</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>AI-focused approach to QA</li>
+            <li>Lead + mentorship experience — matches the "mentor the junior QA" mandate</li>
+            <li>Good communication (confirmed on call)</li>
+            <li>Already interviewed — lowest-risk to advance</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li>Canada — outside preferred EE timezone</li>
+            <li>110k — upper end of budget</li>
+          </ul></div>
+        </div>
+        <div class="verdict"><b>Verdict:</b> The safest confirmed pick — every core competency is observed, not inferred. Loses only on location and cost vs. Catalin. Strong final-round candidate.</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/katsiaryna-rabtsava-a2831049/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://app.fireflies.ai/view/Meet-Katsiaryna-Rabtsava-QA::01KPDZBP8W1RHMAN9B8NJT4ECW" target="_blank" rel="noopener">Call recording ↗</a>
+        </div>
+      </div>
+
+      <!-- PRASHANT -->
+      <div class="card">
+        <div class="card-head"><h3>Prashant Vaghela <span class="tier-tag t-strong">Strong fit · #4</span></h3><span class="card-rank">Score 85 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Canada</b> (non-EE)</span><span>💼 <b>Lead QA</b></span><span>💰 <b>115k</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>Strong lead QA experience with mobile apps</li>
+            <li>AI-focused</li>
+            <li>Could bring a junior QA along to the team</li>
+            <li>Comms confirmed on call</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li><b>115k</b> — highest ask of the shortlist</li>
+            <li>Canada — outside preferred EE timezone</li>
+            <li>"Bring a junior" less relevant — team already has a junior seat</li>
+          </ul></div>
+        </div>
+        <div class="verdict"><b>Verdict:</b> Genuinely strong lead profile, but the most expensive and furthest from the location preference. Advance only if the top three stall.</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/prashantvaghela/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://app.fireflies.ai/view/Meet-Prashant-Vaghela-QA-Lead::01KPBRY48G21B4VMRPCVYY61DG" target="_blank" rel="noopener">Call recording ↗</a>
+        </div>
+      </div>
+
+      <!-- HASNAT -->
+      <div class="card">
+        <div class="card-head"><h3>Hasnat Ahmed <span class="tier-tag t-promising">Promising · #5</span></h3><span class="card-rank">Score 72 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Ireland</b></span><span>💼 <b>Support QA</b></span><span>💰 <b>60k</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>AI-focused, ownership mindset</li>
+            <li>Start-up experience — comfortable with ambiguity</li>
+            <li>Good communication</li>
+            <li>Low salary (60k) — high value</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li><b>No real lead experience</b> — core requirement gap</li>
+            <li>Less senior overall</li>
+          </ul></div>
+        </div>
+        <div class="verdict maybe"><b>Verdict:</b> A great AI-native QA who doesn't yet have the lead chops this manager role needs. Strong candidate for the <em>junior–mid QA seat</em> rather than the Senior Manager role — worth keeping warm.</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/hasnat-a-659a56164/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://app.fireflies.ai/view/Meet-Hasnat-Ahmed-and-Anastasia-Bordiuh::01KP87MR38DXYV93RREBDBD2N7" target="_blank" rel="noopener">Call recording ↗</a>
+        </div>
+      </div>
+
+      <!-- BUSHRA -->
+      <div class="card">
+        <div class="card-head"><h3>Bushra Banu <span class="tier-tag t-promising">Consider · #6</span></h3><span class="card-rank">Score 51 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Ireland</b></span><span>💼 <b>Support QA</b></span><span>💰 <b>n/a</b></span><span>🎯 Recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>Strong experience with mobile apps</li>
+            <li>Uses AI tools in day-to-day QA</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li>No lead experience in the most recent role</li>
+            <li>Hasn't built an end-to-end QA / AI strategy</li>
+          </ul></div>
+        </div>
+        <div class="verdict maybe"><b>Verdict:</b> Solid hands-on mobile tester but not strategy-level. Like Hasnat, a better fit for the junior–mid seat than the manager role.</div>
+        <div class="links"><a href="https://www.linkedin.com/in/bushrabanu/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </div>
+
+      <!-- ALONA -->
+      <div class="card">
+        <div class="card-head"><h3>Alona Flomin <span class="tier-tag t-no">Not for lead · #7</span></h3><span class="card-rank">Score 39 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Canada</b></span><span>💼 <b>Lead QA</b></span><span>💰 <b>73–84k</b></span><span>🎯 Can't recommend for lead</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>Diligent and detail-oriented</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li>Unclear communication — fails the escalation-comms requirement</li>
+            <li>Profile reads as senior IC, not lead — not what Networked needs</li>
+          </ul></div>
+        </div>
+        <div class="verdict no"><b>Verdict:</b> Could be a great senior QA elsewhere, but not the lead/manager profile this role requires. Pass for this position.</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/elenaflomin/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://app.fireflies.ai/view/Alona-Flomin-QA-Lead-Product-focus-::01KP43M2ZF6FN7H0C5XSAVGBZY" target="_blank" rel="noopener">Call recording ↗</a>
+        </div>
+      </div>
+
+      <!-- GIULIA -->
+      <div class="card">
+        <div class="card-head"><h3>Giulia Natoli <span class="tier-tag t-no">Not aligned · #8</span></h3><span class="card-rank">Score 33 / 100</span></div>
+        <div class="facts">
+          <span>📍 <b>Ireland</b></span><span>💼 <b>Lead QA</b></span><span>💰 <b>75–80k</b></span><span>🎯 Can't recommend</span>
+        </div>
+        <div class="flags">
+          <div class="flag-col green"><h4>Green flags</h4><ul>
+            <li>None flagged in screening</li>
+          </ul></div>
+          <div class="flag-col red"><h4>Watch-outs</h4><ul>
+            <li>No lead experience</li>
+            <li>Not deep in AI — misses the year's priority</li>
+          </ul></div>
+        </div>
+        <div class="verdict no"><b>Verdict:</b> Misses the two most important requirements (lead + AI). Pass.</div>
+        <div class="links"><a href="https://www.linkedin.com/in/giulia-natoli/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </div>
+
+      <!-- SHWETA -->
+      <div class="card">
+        <div class="card-head"><h3>Shweta Patel <span class="tier-tag t-pending">Pending</span></h3><span class="card-rank">Not scored</span></div>
+        <div class="facts">
+          <span>📍 <b>Canada</b></span><span>💼 <b>Lead QA</b></span><span>💰 <b>—</b></span><span>🎯 Rescheduled 2×</span>
+        </div>
+        <div class="verdict maybe"><b>Verdict:</b> No screening data yet — call rescheduled twice. Make one more attempt to schedule; if it slips again, deprioritize on responsiveness alone.</div>
+        <div class="links"><a href="https://www.linkedin.com/in/shweta-qa/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+      </div>
+
+    </div>
+
+    <!-- ============ RECOMMENDATION ============ -->
+    <h2><span class="num">04</span>Recommended next steps</h2>
+    <p>
+      <strong>1.</strong> Fast-track <strong>Alex Khomenko</strong> to a final-round / technical deep-dive — best overall fit and ideal location.<br>
+      <strong>2.</strong> Re-engage <strong>Catalin Faur</strong> with a firm scheduling nudge; his EE + cost profile makes him worth the chase if comms check out.<br>
+      <strong>3.</strong> Keep <strong>Katsiaryna Rabtsava</strong> warm as the confirmed, low-risk runner-up; <strong>Prashant Vaghela</strong> as the premium backup.<br>
+      <strong>4.</strong> Route <strong>Hasnat Ahmed</strong> (and possibly Bushra Banu) toward the <em>junior–mid QA</em> opening instead of the manager role.<br>
+      <strong>5.</strong> One final scheduling attempt for <strong>Shweta Patel</strong>; pass on Alona &amp; Giulia for this role.
+    </p>
+
+    <a href="/indocs/" class="back">&larr; Back to internal docs</a>
+  </div>
+
+  <script src="/vendor/supabase-js-2.39.3.min.js"></script>
+  <script type="module">
+    import { initAuth, requireRole } from '/shared/auth.js';
+
+    (async () => {
+      await initAuth();
+      // Guard: staff role or higher (staff, admin, oracle). Redirects otherwise.
+      if (requireRole('staff')) {
+        document.body.classList.add('ready');
+      }
+    })();
+  </script>
+</body>
+</html>

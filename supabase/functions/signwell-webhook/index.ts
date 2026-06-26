@@ -268,7 +268,7 @@ async function processRentalAgreement(
         .eq('id', application.waiver_template_id)
         .single();
 
-      const tenantRecipient = payload?.recipients?.find((r: any) => r.email !== 'admin@YOUR_DOMAIN');
+      const tenantRecipient = payload?.recipients?.find((r: any) => r.email !== 'admin@topwebweb.com');
       const signerName = person ? `${person.first_name || ''} ${person.last_name || ''}`.trim() : 'Unknown';
 
       await supabase.from('waiver_signatures').insert({
@@ -496,9 +496,9 @@ async function sendRentalSignedEmail(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property Team <team@YOUR_DOMAIN>',
+        from: 'Property Team <team@topwebweb.com>',
         to: [person.email],
-        reply_to: 'team@YOUR_DOMAIN',
+        reply_to: 'team@topwebweb.com',
         subject: 'Lease Signed - Reservation Deposit Due - YOUR_PROPERTY_NAME',
         html: `
           <h2>Lease Signing Complete!</h2>
@@ -535,7 +535,7 @@ async function sendRentalSignedEmail(
           </div>
 
           <p>Once we receive your reservation deposit, we'll send confirmation and prepare for your arrival.</p>
-          <p>Questions? Reply to this email or contact us at team@YOUR_DOMAIN</p>
+          <p>Questions? Reply to this email or contact us at team@topwebweb.com</p>
           <p>Best regards,<br>YOUR_PROPERTY_NAME</p>
         `,
         text: `Lease Signing Complete!
@@ -566,7 +566,7 @@ https://YOUR_DOMAIN/residents/profile.html
 
 Once we receive your reservation deposit, we'll send confirmation and prepare for your arrival.
 
-Questions? Reply to this email or contact us at team@YOUR_DOMAIN
+Questions? Reply to this email or contact us at team@topwebweb.com
 
 Best regards,
 YOUR_PROPERTY_NAME`,
@@ -610,9 +610,9 @@ async function sendEventSignedEmail(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property Team <team@YOUR_DOMAIN>',
+        from: 'Property Team <team@topwebweb.com>',
         to: [person.email],
-        reply_to: 'team@YOUR_DOMAIN',
+        reply_to: 'team@topwebweb.com',
         subject: 'Event Agreement Signed - Outstanding Fees Due Before Event - YOUR_PROPERTY_NAME',
         html: `
           <h2>Event Agreement Signed!</h2>
@@ -663,7 +663,7 @@ async function sendEventSignedEmail(
           </ul>
 
           <p>Once we receive the cleaning deposit and rental fee, your event is confirmed!</p>
-          <p>Questions? Reply to this email or contact us at team@YOUR_DOMAIN</p>
+          <p>Questions? Reply to this email or contact us at team@topwebweb.com</p>
           <p>Best regards,<br>YOUR_PROPERTY_NAME</p>
         `,
         text: `Event Agreement Signed!
@@ -701,7 +701,7 @@ REMINDERS
 
 Once we receive the cleaning deposit and rental fee, your event is confirmed!
 
-Questions? Reply to this email or contact us at team@YOUR_DOMAIN
+Questions? Reply to this email or contact us at team@topwebweb.com
 
 Best regards,
 YOUR_PROPERTY_NAME`,
@@ -767,9 +767,9 @@ ${vehicleInfo.color ? `Color: ${vehicleInfo.color}\n` : ''}${vehicleInfo.vin ? `
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property Team <team@YOUR_DOMAIN>',
+        from: 'Property Team <team@topwebweb.com>',
         to: [person.email],
-        reply_to: 'team@YOUR_DOMAIN',
+        reply_to: 'team@topwebweb.com',
         subject,
         html: `
           <h2>${hasVehicle ? 'Your Vehicle Information' : 'Register Your Vehicle'}</h2>
@@ -797,7 +797,7 @@ ${vehicleInfo.color ? `Color: ${vehicleInfo.color}\n` : ''}${vehicleInfo.vin ? `
             <p style="margin-bottom: 0;">If your vehicle is a Tesla, you can connect it to our smart charging system. This enables lock/unlock for charger rotation and lets you monitor your car's battery and charging status right from the resident dashboard. Just select "Tesla" as the make when registering, and you'll be guided through the quick connection process.</p>
           </div>
 
-          <p>Questions? Reply to this email or contact us at team@YOUR_DOMAIN</p>
+          <p>Questions? Reply to this email or contact us at team@topwebweb.com</p>
           <p>Best regards,<br>YOUR_PROPERTY_NAME</p>
         `,
         text: `${hasVehicle ? 'Your Vehicle Information' : 'Register Your Vehicle'}
@@ -822,7 +822,7 @@ DRIVE A TESLA?
 --------------
 If your vehicle is a Tesla, you can connect it to our smart charging system. This enables lock/unlock for charger rotation and lets you monitor your car's battery and charging status right from the resident dashboard. Just select "Tesla" as the make when registering, and you'll be guided through the quick connection process.
 
-Questions? Reply to this email or contact us at team@YOUR_DOMAIN
+Questions? Reply to this email or contact us at team@topwebweb.com
 
 Best regards,
 YOUR_PROPERTY_NAME`,

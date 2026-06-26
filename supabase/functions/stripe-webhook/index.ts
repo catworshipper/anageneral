@@ -5,7 +5,7 @@
  * Updates payouts table (and optionally stripe_payments) and ledger accordingly.
  * On payment success, sends a rich confirmation email to the payer with a statement
  * summary showing what was paid, prior payments, and remaining balance.
- * Also forwards to payments@YOUR_DOMAIN.
+ * Also forwards to payments@topwebweb.com.
  *
  * Deploy with: supabase functions deploy stripe-webhook --no-verify-jwt
  * Webhook URL: YOUR_SUPABASE_URL/functions/v1/stripe-webhook
@@ -25,7 +25,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, stripe-signature'
 };
 
-const PAYMENTS_EMAIL = 'payments@YOUR_DOMAIN';
+const PAYMENTS_EMAIL = 'payments@topwebweb.com';
 
 interface StripeEvent {
   id: string;
@@ -355,9 +355,9 @@ YOUR_PROPERTY_NAME`;
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property Team <team@YOUR_DOMAIN>',
+        from: 'Property Team <team@topwebweb.com>',
         to: [person.email],
-        reply_to: 'team@YOUR_DOMAIN',
+        reply_to: 'team@topwebweb.com',
         subject: `Payment Received - ${formatCurrency(row.amount)} - YOUR_PROPERTY_NAME`,
         html: emailHtml,
         text: emailText,
@@ -382,7 +382,7 @@ YOUR_PROPERTY_NAME`;
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Property System <auto@YOUR_DOMAIN>',
+        from: 'Property System <auto@topwebweb.com>',
         to: [PAYMENTS_EMAIL],
         subject: `[Stripe] ${formatCurrency(row.amount)} received from ${person.first_name} ${person.last_name} - ${paymentTypeLabel}`,
         html: emailHtml,

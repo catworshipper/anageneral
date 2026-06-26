@@ -374,7 +374,7 @@ interface PaiConfig {
   email_addendum: string;
   discord_addendum: string;
   api_addendum: string;
-  ai-admin_addendum: string;
+  ai_admin_addendum: string;
   house_rules: string;
 }
 
@@ -384,11 +384,11 @@ const DEFAULT_PAI_CONFIG: PaiConfig = {
 You are warm, friendly, and helpful — like a knowledgeable neighbor who genuinely wants to help. You speak plainly and get to the point. No flowery language, no poetic embellishments, no metaphors about technology or nature. Just clear, practical answers with a friendly tone.`,
   property_info: `PROPERTY INFO:
 - Location: 123 Main Stive, Your City, TX 00000
-- Contact email: team@YOUR_DOMAIN
+- Contact email: team@topwebweb.com
 - Contact SMS: +1 (737) 747-4737
 - WiFi network: Eight Small Eyes, password: iiiiiiii
 - Resident portal: YOUR_DOMAIN/residents/
-- For maintenance requests, email team@YOUR_DOMAIN
+- For maintenance requests, email team@topwebweb.com
 - We are a tech-forward co-living community, 30 minutes east of Austin.`,
   amenities: `AMENITIES & SMART HOME:
 - Sonos audio system with 12 zones throughout the property
@@ -407,7 +407,7 @@ You are warm, friendly, and helpful — like a knowledgeable neighbor who genuin
   email_addendum: "",
   discord_addendum: "",
   api_addendum: "",
-  ai-admin_addendum: "",
+  ai_admin_addendum: "",
   house_rules: "",
 };
 
@@ -417,7 +417,7 @@ async function loadPaiConfig(supabase: any): Promise<PaiConfig> {
     const [configResult, faqResult] = await Promise.all([
       supabase
         .from("pai_config")
-        .select("identity, property_info, amenities, chat_addendum, email_addendum, discord_addendum, api_addendum, ai-admin_addendum")
+        .select("identity, property_info, amenities, chat_addendum, email_addendum, discord_addendum, api_addendum, ai_admin_addendum")
         .eq("id", 1)
         .single(),
       supabase
@@ -3556,7 +3556,7 @@ async function handleChatRequest(req: Request, body: any, supabase: any): Promis
   const isEmailChannel = context.source === "email";
   const isDiscordChannel = context.source === "discord";
   const isApiChannel = context.source === "api";
-  const isAI AdminEmailChannel = context.source === "ai-admin-email";
+  const isAIAdminEmailChannel = context.source === "ai-admin-email";
   if (!message?.trim()) {
     return jsonResponse({ error: "Message is required" }, 400);
   }
@@ -3573,7 +3573,7 @@ async function handleChatRequest(req: Request, body: any, supabase: any): Promis
   let userLevel: number;
 
   // Email/API/AlpaClaw channel: internal services call with service role key (no user JWT)
-  if ((isEmailChannel || isApiChannel || isAI AdminEmailChannel) && isServiceKey) {
+  if ((isEmailChannel || isApiChannel || isAIAdminEmailChannel) && isServiceKey) {
     const senderEmail = (context.sender || "").trim().toLowerCase();
     if (senderEmail) {
       const { data: appUserRow } = await supabase
@@ -3699,8 +3699,8 @@ async function handleChatRequest(req: Request, body: any, supabase: any): Promis
 
   // 4. Build system prompt (shared base + channel-specific addendum)
   let systemPrompt = buildSystemPrompt(scope, paiConfig);
-  if (isAI AdminEmailChannel && paiConfig.ai-admin_addendum?.trim()) {
-    systemPrompt += "\n\n" + paiConfig.ai-admin_addendum.trim();
+  if (isAIAdminEmailChannel && paiConfig.ai_admin_addendum?.trim()) {
+    systemPrompt += "\n\n" + paiConfig.ai_admin_addendum.trim();
   } else if (isEmailChannel && paiConfig.email_addendum?.trim()) {
     systemPrompt += "\n\n" + paiConfig.email_addendum.trim();
   } else if (isDiscordChannel && paiConfig.discord_addendum?.trim()) {
@@ -3713,7 +3713,7 @@ async function handleChatRequest(req: Request, body: any, supabase: any): Promis
     if (context.api_addendum?.trim()) {
       systemPrompt += "\n\n" + context.api_addendum.trim();
     }
-  } else if (!isEmailChannel && !isDiscordChannel && !isApiChannel && !isAI AdminEmailChannel && paiConfig.chat_addendum?.trim()) {
+  } else if (!isEmailChannel && !isDiscordChannel && !isApiChannel && !isAIAdminEmailChannel && paiConfig.chat_addendum?.trim()) {
     systemPrompt += "\n\n" + paiConfig.chat_addendum.trim();
   }
 
@@ -3960,7 +3960,7 @@ async function checkMonthlySpendAlert(
       },
       body: JSON.stringify({
         type: "custom",
-        to: "automation@YOUR_DOMAIN",
+        to: "automation@topwebweb.com",
         subject: `⚠️ PAI API spend alert: $${totalSpend.toFixed(2)} this month`,
         data: {
           html: `

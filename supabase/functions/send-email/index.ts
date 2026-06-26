@@ -1788,7 +1788,7 @@ This is an automated reply from PAI at YOUR_PROPERTY_NAME.`
         subject: `PAI Document Upload: ${data.file_count || 1} file(s) from ${data.sender_name || data.sender_email}`,
         html: `
           <h2 style="color: #3d8b7a;">Document Received via PAI Email</h2>
-          <p><strong>${data.sender_name || 'Unknown'}</strong> (${data.sender_email}) sent ${data.file_count || 1} document(s) to <code>pai@YOUR_DOMAIN</code>.</p>
+          <p><strong>${data.sender_name || 'Unknown'}</strong> (${data.sender_email}) sent ${data.file_count || 1} document(s) to <code>pai@topwebweb.com</code>.</p>
 
           <div style="background: #f0faf7; padding: 15px; border-radius: 8px; border-left: 4px solid #3d8b7a; margin: 15px 0;">
             <strong>Subject:</strong> ${data.original_subject || '(none)'}<br>
@@ -1803,7 +1803,7 @@ This is an automated reply from PAI at YOUR_PROPERTY_NAME.`
         `,
         text: `PAI Document Upload
 
-${data.sender_name || 'Unknown'} (${data.sender_email}) sent ${data.file_count || 1} document(s) to pai@YOUR_DOMAIN.
+${data.sender_name || 'Unknown'} (${data.sender_email}) sent ${data.file_count || 1} document(s) to pai@topwebweb.com.
 
 Subject: ${data.original_subject || '(none)'}
 ${data.message_body ? `Message: ${data.message_body.substring(0, 500)}` : ''}
@@ -2526,9 +2526,9 @@ async function holdForApproval(
     method: "POST",
     headers: { Authorization: `Bearer ${resendApiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: "Alpaca Payments <pai@YOUR_DOMAIN>",
-      to: ["admin@YOUR_DOMAIN"],
-      reply_to: "pai@YOUR_DOMAIN",
+      from: "Alpaca Payments <pai@topwebweb.com>",
+      to: ["admin@topwebweb.com"],
+      reply_to: "pai@topwebweb.com",
       subject: `[Approval Required] ${typeLabel}: ${subject}`,
       html: reviewHtml,
       text: `Email Approval Required\nType: ${typeLabel}\nTo: ${recipientList}\nSubject: ${subject}\n\nApprove: ${approveOneUrl}\nApprove All: ${approveAllUrl}`,
@@ -2590,8 +2590,8 @@ serve(async (req) => {
       }
     }
 
-    // === ALWAYS BCC admin@YOUR_DOMAIN ===
-    const ARCHIVE_BCC = "admin@YOUR_DOMAIN";
+    // === ALWAYS BCC admin@topwebweb.com ===
+    const ARCHIVE_BCC = "admin@topwebweb.com";
     const toArray = Array.isArray(to) ? to : [to];
     const ccArray = cc ? (Array.isArray(cc) ? cc : [cc]) : undefined;
     const userBcc = bcc ? (Array.isArray(bcc) ? bcc : [bcc]) : [];

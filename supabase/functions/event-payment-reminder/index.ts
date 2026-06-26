@@ -197,9 +197,9 @@ Deno.serve(async (req) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            from: 'Property Team <team@YOUR_DOMAIN>',
+            from: 'Property Team <team@topwebweb.com>',
             to: [person.email],
-            reply_to: 'team@YOUR_DOMAIN',
+            reply_to: 'team@topwebweb.com',
             subject: `Payment Reminder: ${event.event_name} - Fees Due in 3 Days`,
             html: `
               <h2>Payment Reminder - Your Event is Coming Up!</h2>
@@ -238,7 +238,7 @@ Deno.serve(async (req) => {
                 <li>Cleanup must be completed by 1:01pm the day after your event</li>
               </ul>
 
-              <p>Questions? Reply to this email or contact us at team@YOUR_DOMAIN</p>
+              <p>Questions? Reply to this email or contact us at team@topwebweb.com</p>
               <p>Best regards,<br>YOUR_PROPERTY_NAME</p>
             `,
             text: `Payment Reminder - Your Event is Coming Up!
@@ -272,7 +272,7 @@ QUICK REMINDERS
 - Direct attendees to YOUR_DOMAIN/visiting for directions (do NOT post the address publicly)
 - Cleanup must be completed by 1:01pm the day after your event
 
-Questions? Reply to this email or contact us at team@YOUR_DOMAIN
+Questions? Reply to this email or contact us at team@topwebweb.com
 
 Best regards,
 YOUR_PROPERTY_NAME`,

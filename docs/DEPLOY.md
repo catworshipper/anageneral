@@ -41,12 +41,12 @@ Every pull request automatically gets a preview deployment URL:
 
 | Environment | URL |
 |---|---|
-| Custom domain | https://YOUR_DOMAIN/ |
+| Custom domain | https://topwebweb.com/ |
 | Cloudflare Pages | https://YOUR_PROJECT.pages.dev/ |
-| Resident portal | https://YOUR_DOMAIN/residents/ |
-| Admin | https://YOUR_DOMAIN/spaces/admin/manage.html |
-| Public spaces | https://YOUR_DOMAIN/spaces/ |
-| Payments | https://YOUR_DOMAIN/pay/ |
+| Resident portal | https://topwebweb.com/residents/ |
+| Admin | https://topwebweb.com/spaces/admin/manage.html |
+| Public spaces | https://topwebweb.com/spaces/ |
+| Payments | https://topwebweb.com/pay/ |
 | Repository | https://github.com/USERNAME/REPO |
 
 ## Tailwind CSS

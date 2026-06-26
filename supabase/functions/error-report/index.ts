@@ -23,9 +23,9 @@ const corsHeaders = {
 };
 
 // Email configuration
-const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL') || 'automation@YOUR_DOMAIN';
+const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL') || 'automation@topwebweb.com';
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-const FROM_EMAIL = 'Property Automaton Errors <auto@YOUR_DOMAIN>';
+const FROM_EMAIL = 'Property Automaton Errors <auto@topwebweb.com>';
 
 // =============================================
 // RISK EVALUATION CONFIG
@@ -358,7 +358,7 @@ async function handleErrorReport(report: ErrorReport) {
         .from('bug_reports')
         .insert({
           reporter_name: 'Property Error Monitor',
-          reporter_email: 'automation@YOUR_DOMAIN',
+          reporter_email: 'automation@topwebweb.com',
           description,
           page_url: pageUrl,
           error_message: `${error.code}: ${error.message}`.substring(0, 500),

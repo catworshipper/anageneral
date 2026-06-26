@@ -50,27 +50,27 @@ export const SENDER_MAP: Record<
   { from: string; reply_to: string }
 > = {
   team: {
-    from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
   auto: {
-    from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
   noreply: {
-    from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
   payments: {
-    from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
   pai: {
-    from: "PAI at the YOUR_PROPERTY_NAME <pai@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "PAI at the YOUR_PROPERTY_NAME <pai@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
   claudero: {
-    from: "Claudero <claudero@YOUR_DOMAIN>",
-    reply_to: "pai@YOUR_DOMAIN",
+    from: "Claudero <claudero@topwebweb.com>",
+    reply_to: "pai@topwebweb.com",
   },
 };

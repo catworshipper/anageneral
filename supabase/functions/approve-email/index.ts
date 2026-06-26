@@ -234,7 +234,7 @@ async function processPayrollApproval(html: string, supabaseUrl: string, supabas
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${supabaseKey}` },
         body: JSON.stringify({
           type: "custom",
-          to: "admin@YOUR_DOMAIN",
+          to: "admin@topwebweb.com",
           subject: `Payroll Payout FAILED — ${meta.associate_name}`,
           data: {
             _raw_html: `<h2 style="color:#c62828;">Payout Failed</h2>
