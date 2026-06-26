@@ -1,12 +1,12 @@
 {
-  "version": "v260626.03 11:26a",
-  "release": 3,
-  "sha": "e7f3215",
-  "fullSha": "e7f32159edda0fb3aa80de250d77ab5542e512ec",
+  "version": "v260626.04 12:41p",
+  "release": 4,
+  "sha": "50af783",
+  "fullSha": "50af783eb14490c3b304d600565d4045c0b1959e",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T13:25:58+02:00",
-  "commits": [{"sha":"e7f3215","message":"Configure Supabase URL and publishable key","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-26T14:41:03+02:00",
+  "commits": [{"sha":"50af783","message":"Set up Ana homepage and wire Google OAuth auth","author":"AnastasiaBordiuh"}]
 }
