@@ -1,12 +1,12 @@
 {
-  "version": "v260626.11 4:00p",
-  "release": 11,
-  "sha": "c8f8af5",
-  "fullSha": "c8f8af58994f60af83a80f68a003290ccdc07f72",
+  "version": "v260627.01 12:53p",
+  "release": 1,
+  "sha": "40f6281",
+  "fullSha": "40f62819c75b2693a70b6dbd8bf56d013613cf79",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-26T18:00:30+02:00",
-  "commits": [{"sha":"c8f8af5","message":"Fix YOUR_DOMAIN placeholder link on login page","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-27T14:53:17+02:00",
+  "commits": [{"sha":"40f6281","message":"Replace YOUR_DOMAIN placeholder with topwebweb.com across shipped code","author":"AnastasiaBordiuh"}]
 }
