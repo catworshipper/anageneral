@@ -62,26 +62,26 @@ INSERT INTO property_config (id, config) VALUES (1, '{
     "timezone": "America/Chicago"
   },
   "domain": {
-    "primary": "YOUR_DOMAIN",
+    "primary": "topwebweb.com",
     "cloudflare_pages": "YOUR_PROJECT.pages.dev",
     "camera_proxy": "YOUR_CAMERA_PROXY"
   },
   "email": {
-    "team": "team@YOUR_DOMAIN",
-    "admin_gmail": "admin@YOUR_DOMAIN",
-    "notifications_from": "notifications@YOUR_DOMAIN",
-    "noreply_from": "noreply@YOUR_DOMAIN",
-    "automation": "automation@YOUR_DOMAIN"
+    "team": "team@topwebweb.com",
+    "admin_gmail": "admin@topwebweb.com",
+    "notifications_from": "notifications@topwebweb.com",
+    "noreply_from": "noreply@topwebweb.com",
+    "automation": "automation@topwebweb.com"
   },
   "payment": {
-    "zelle_email": "admin@YOUR_DOMAIN",
+    "zelle_email": "admin@topwebweb.com",
     "venmo_handle": "@YourVenmo"
   },
   "ai_assistant": {
     "name": "PAI",
     "full_name": "Property AI Assistant",
     "personality": "the AI assistant for the property",
-    "email_from": "pai@YOUR_DOMAIN"
+    "email_from": "pai@topwebweb.com"
   },
   "wifi": {
     "network_name": "Black Rock City"

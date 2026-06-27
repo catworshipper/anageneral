@@ -127,7 +127,7 @@ serve(async (req) => {
           grant_type: "authorization_code",
           redirect_uri:
             body.redirectUri ||
-            "https://YOUR_DOMAIN/residents/climate.html",
+            "https://topwebweb.com/residents/climate.html",
         }),
       });
 

@@ -218,7 +218,7 @@ Deno.serve(async (req) => {
         );
       }
 
-      const baseUrl = 'https://YOUR_DOMAIN/associates/worktracking.html';
+      const baseUrl = 'https://topwebweb.com/associates/worktracking.html';
       const returnUrl = `${baseUrl}?stripe_onboarding=complete`;
       const refreshUrl = `${baseUrl}?stripe_onboarding=refresh`;
 

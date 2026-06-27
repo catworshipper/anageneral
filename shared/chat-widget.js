@@ -111,7 +111,7 @@ async function sendAdminNotification(question, userEmail) {
         data: {
           question,
           user_email: userEmail || 'Not provided',
-          faq_admin_url: 'https://YOUR_DOMAIN/spaces/admin/faq.html'
+          faq_admin_url: 'https://topwebweb.com/spaces/admin/faq.html'
         }
       })
     });

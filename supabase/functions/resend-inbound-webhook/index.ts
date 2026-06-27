@@ -66,7 +66,7 @@ const DEFAULT_FORWARD_TO = "admin@topwebweb.com";
 
 /**
  * Extract the local part (prefix) from an email address.
- * e.g. "haydn@mail.YOUR_DOMAIN" → "haydn"
+ * e.g. "haydn@mail.topwebweb.com" → "haydn"
  */
 function extractPrefix(email: string): string {
   return email.split("@")[0].toLowerCase().trim();
@@ -624,8 +624,8 @@ async function handleClauderoEmail(
 
   // Send acknowledgment reply
   const ackText = parentRequest
-    ? `Got it — I'll look at the context from ${versionMatch ? `version ${`v${versionMatch[1]}`}` : `your previous build`} and process your feedback. You can track progress at https://YOUR_DOMAIN/spaces/admin/appdev.html`
-    : `Got it — I'll process your request. You can track progress at https://YOUR_DOMAIN/spaces/admin/appdev.html`;
+    ? `Got it — I'll look at the context from ${versionMatch ? `version ${`v${versionMatch[1]}`}` : `your previous build`} and process your feedback. You can track progress at https://topwebweb.com/spaces/admin/appdev.html`
+    : `Got it — I'll process your request. You can track progress at https://topwebweb.com/spaces/admin/appdev.html`;
 
   await sendClauderoReply(resendApiKey, senderEmail, ackText, subject, messageBody);
 }
@@ -1076,7 +1076,7 @@ async function handleAIAdminEmail(
     }
 
     if (!replyText) {
-      replyText = `Thank you for your email! I've received your message and I'll do my best to help.\n\nFor faster responses, you can also chat with me on Discord at the Alpacord server, or visit https://YOUR_DOMAIN/residents/ (requires resident login).`;
+      replyText = `Thank you for your email! I've received your message and I'll do my best to help.\n\nFor faster responses, you can also chat with me on Discord at the Alpacord server, or visit https://topwebweb.com/residents/ (requires resident login).`;
     }
 
     const sendResult = await sendAIAdminReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
@@ -1108,7 +1108,7 @@ async function handleAIAdminEmail(
     const sendResult = await sendAIAdminReply(
       resendApiKey,
       senderEmail,
-      "Thank you for your email! I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can reach us on Discord or at https://YOUR_DOMAIN/residents/.",
+      "Thank you for your email! I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can reach us on Discord or at https://topwebweb.com/residents/.",
       subject,
       bodyText || bodyHtml || ""
     );
@@ -1158,7 +1158,7 @@ async function sendPaiDocumentNotification(
         message_body: messageBody,
         files,
         file_count: files.length,
-        admin_url: "https://YOUR_DOMAIN/spaces/admin/manage.html",
+        admin_url: "https://topwebweb.com/spaces/admin/manage.html",
       },
       sender_type: "auto",
     }),
@@ -1434,7 +1434,7 @@ async function handlePaiEmail(
       await sendPaiReply(
         resendApiKey,
         senderEmail,
-        `Thank you for sending ${processedReceipts.length === 1 ? "the receipt" : `${processedReceipts.length} receipts`}! I've processed and logged:\n\n${receiptsList}\n\nYou can view all purchases at https://YOUR_DOMAIN/spaces/admin/purchases.html`,
+        `Thank you for sending ${processedReceipts.length === 1 ? "the receipt" : `${processedReceipts.length} receipts`}! I've processed and logged:\n\n${receiptsList}\n\nYou can view all purchases at https://topwebweb.com/spaces/admin/purchases.html`,
         subject,
         bodyText || bodyHtml || ""
       );
@@ -1572,7 +1572,7 @@ async function handlePaiEmail(
       }
 
       if (!replyText) {
-        replyText = `Thank you for your email. I've received your ${classification.type === "command" ? "request" : "question"} and I'll have someone from the team follow up with you.\n\nFor faster responses, you can chat with me directly at https://YOUR_DOMAIN/residents/ (requires resident login).`;
+        replyText = `Thank you for your email. I've received your ${classification.type === "command" ? "request" : "question"} and I'll have someone from the team follow up with you.\n\nFor faster responses, you can chat with me directly at https://topwebweb.com/residents/ (requires resident login).`;
       }
 
       const sendResult = await sendPaiReply(resendApiKey, senderEmail, replyText, subject, bodyText || bodyHtml || "");
@@ -1605,7 +1605,7 @@ async function handlePaiEmail(
       const sendResult = await sendPaiReply(
         resendApiKey,
         senderEmail,
-        "Thank you for your email. I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can call us or chat with me at https://YOUR_DOMAIN/residents/.",
+        "Thank you for your email. I've received your message and the team will review it shortly.\n\nFor immediate assistance, you can call us or chat with me at https://topwebweb.com/residents/.",
         subject,
         bodyText || bodyHtml || ""
       );
@@ -1932,7 +1932,7 @@ async function handleOutboundZellePayment(
         <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Method</td><td style="padding:8px;border-bottom:1px solid #eee;">Zelle outbound (${outbound.bank})</td></tr>
         <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Category</td><td style="padding:8px;border-bottom:1px solid #eee;">${categoryLabel}</td></tr>
       </table>
-      <p style="color:#666;font-size:0.85rem;margin-top:12px;">This outbound payment was auto-recorded in the ledger. Verify the category in the <a href="https://YOUR_DOMAIN/spaces/admin/accounting.html">accounting dashboard</a>.</p>
+      <p style="color:#666;font-size:0.85rem;margin-top:12px;">This outbound payment was auto-recorded in the ledger. Verify the category in the <a href="https://topwebweb.com/spaces/admin/accounting.html">accounting dashboard</a>.</p>
     </div>
   `;
 
@@ -2722,7 +2722,7 @@ async function sendPaymentNotification(
 ): Promise<void> {
   const adminEmail = "team@topwebweb.com";
   const { parsed, personName, applicationId } = details;
-  const adminUrl = `https://YOUR_DOMAIN/spaces/admin/rentals.html#applicant=${applicationId}`;
+  const adminUrl = `https://topwebweb.com/spaces/admin/rentals.html#applicant=${applicationId}`;
 
   let subject = "";
   let html = "";
@@ -2895,7 +2895,7 @@ async function handlePaymentEmail(
               <hr style="border:none;border-top:1px solid #eee;margin:16px 0;">
               <p style="font-size:0.85rem;color:#666;"><strong>Body preview:</strong></p>
               <pre style="background:#f8f8f8;padding:12px;border-radius:4px;font-size:0.8rem;white-space:pre-wrap;max-height:300px;overflow:auto;">${snippet}</pre>
-              <p style="color:#666;font-size:0.85rem;margin-top:12px;">Please review and manually record in the <a href="https://YOUR_DOMAIN/spaces/admin/accounting.html">accounting dashboard</a> if needed.</p>
+              <p style="color:#666;font-size:0.85rem;margin-top:12px;">Please review and manually record in the <a href="https://topwebweb.com/spaces/admin/accounting.html">accounting dashboard</a> if needed.</p>
             </div>
           `,
         }),

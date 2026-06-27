@@ -399,7 +399,7 @@ Emergency Contact & Phone #: {{emergency_contact}}
 
 ---
 
-**Payments:** YOUR_DOMAIN/pay
+**Payments:** topwebweb.com/pay
 `;
 }
 

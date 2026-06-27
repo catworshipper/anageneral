@@ -26,7 +26,7 @@ const FALLBACK = {
     platform_name: 'YOUR_APP_NAME',
     tagline: 'We put the AI into Propertys',
     address: '123 Main St, Your City, ST 00000',
-    website: 'https://YOUR_DOMAIN',
+    website: 'https://topwebweb.com',
   },
   colors: {
     primary: {
@@ -201,7 +201,7 @@ export async function wrapEmailHtml(
 
   const accent = accentColor || c.accent;
 
-  const siteUrl = brand.website || 'https://YOUR_DOMAIN';
+  const siteUrl = brand.website || 'https://topwebweb.com';
   const headerHtml = showHeader ? `
     <!-- Header -->
     <tr>

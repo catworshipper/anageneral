@@ -424,7 +424,7 @@ async function inviteUser(email, role, personInfo = {}) {
  * Send or resend invitation email and update tracking
  */
 async function sendInvitationEmail(invitationId, email, role) {
-  const loginUrl = 'https://YOUR_DOMAIN/login/';
+  const loginUrl = 'https://topwebweb.com/login/';
 
   // Look up person's name for personalized greeting
   let name = '';
@@ -543,14 +543,14 @@ You've been invited to access AlpacApp as ${roleLabels[role] || 'a user'}.
 You will have ${roleDescription}.
 
 To get started:
-1. Go to: https://YOUR_DOMAIN/login/
+1. Go to: https://topwebweb.com/login/
 2. Sign in with Google, or use your email and password
 
 If you don't have a password yet, click "Forgot password?" on the login page to set one up.
 
 Your access has already been pre-approved for ${email}, so you'll have immediate access once you sign in.
 
-If there are any problems or suggestions for improvements, please email them to team@YOUR_DOMAIN as soon as you can and they will be rapidly addressed.`;
+If there are any problems or suggestions for improvements, please email them to team@topwebweb.com as soon as you can and they will be rapidly addressed.`;
 
   // Show modal
   const modal = document.getElementById('inviteTextModal');
@@ -572,7 +572,7 @@ function closeInviteModal() {
 }
 
 function showProspectLinkModal(token, name, email) {
-  const url = `https://YOUR_DOMAIN/spaces/?access=${token}`;
+  const url = `https://topwebweb.com/spaces/?access=${token}`;
   const firstName = name && name !== 'Prospect' ? name.split(' ')[0] : '';
 
   const inviteText = `Hi${firstName ? ' ' + firstName : ''},
@@ -586,10 +586,10 @@ ${url}
 You'll be able to see photos, amenities, pricing, and availability for all of our spaces. This link is personal to you and will expire in 14 days.
 
 When you're ready, you can also:
-• Apply for a rental space: https://YOUR_DOMAIN/spaces/apply/
-• Host an event: https://YOUR_DOMAIN/spaces/hostevent/
+• Apply for a rental space: https://topwebweb.com/spaces/apply/
+• Host an event: https://topwebweb.com/spaces/hostevent/
 
-If you have any questions or would like to schedule a tour, feel free to reply to this message or email team@YOUR_DOMAIN.
+If you have any questions or would like to schedule a tour, feel free to reply to this message or email team@topwebweb.com.
 
 Yours,
 The YOUR_PROPERTY_NAME Community Team`;
@@ -640,7 +640,7 @@ async function sendInviteEmail() {
   try {
     // Handle prospect emails differently
     if (currentInviteRole === 'prospect' && currentProspectToken) {
-      const accessUrl = `https://YOUR_DOMAIN/spaces/?access=${currentProspectToken}`;
+      const accessUrl = `https://topwebweb.com/spaces/?access=${currentProspectToken}`;
       const emailResult = await emailService.sendProspectInvitation(currentInviteEmail, currentProspectName, accessUrl);
 
       if (emailResult.success) {

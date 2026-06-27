@@ -222,7 +222,7 @@ async function classifyWithOpenRouter(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://YOUR_DOMAIN",
+        "HTTP-Referer": "https://topwebweb.com",
         "X-Title": "YOUR_APP_NAME Email Classifier",
       },
       body: JSON.stringify({

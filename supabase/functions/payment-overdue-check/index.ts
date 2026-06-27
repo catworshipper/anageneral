@@ -19,7 +19,7 @@ const corsHeaders = {
 
 const TEAM_EMAIL = 'team@topwebweb.com';
 const ESCALATION_DAYS = [1, 3, 5, 7]; // days after due date
-const PAY_BASE_URL = 'https://YOUR_DOMAIN/pay/';
+const PAY_BASE_URL = 'https://topwebweb.com/pay/';
 
 interface OverdueItem {
   sourceType: string;
@@ -718,7 +718,7 @@ Deno.serve(async (req) => {
             .select('token')
             .single();
           if (tokenData?.token) {
-            uploadUrl = `https://YOUR_DOMAIN/spaces/verify.html?token=${tokenData.token}`;
+            uploadUrl = `https://topwebweb.com/spaces/verify.html?token=${tokenData.token}`;
           }
         }
         personIdVerification.set(personId, { needsId, uploadUrl });

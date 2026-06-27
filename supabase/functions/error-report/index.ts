@@ -117,7 +117,7 @@ function evaluateRisk(error: ErrorEntry): RiskAssessment {
   let level: 'low' | 'medium' | 'high' = 'low';
 
   const pageUrl = error.environment?.url || '';
-  const pagePath = new URL(pageUrl, 'https://YOUR_DOMAIN').pathname;
+  const pagePath = new URL(pageUrl, 'https://topwebweb.com').pathname;
 
   // Check high-risk paths
   if (HIGH_RISK_PATHS.some(p => pagePath.startsWith(p))) {
@@ -194,7 +194,7 @@ function getErrorSignature(error: ErrorEntry): string {
   const pageUrl = error.environment?.url || '';
   let pagePath = '';
   try {
-    pagePath = new URL(pageUrl, 'https://YOUR_DOMAIN').pathname;
+    pagePath = new URL(pageUrl, 'https://topwebweb.com').pathname;
   } catch {
     pagePath = pageUrl;
   }

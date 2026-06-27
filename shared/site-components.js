@@ -28,7 +28,7 @@ const IMAGES = {
   heroPropertys: 'https://images.squarespace-cdn.com/content/v1/6213d804273001551ffe5b8c/4e23696e-623b-4621-8f3a-c223a521131b/P1020387.jpeg',
 };
 
-// Base path for links (root on YOUR_DOMAIN)
+// Base path for links (root on topwebweb.com)
 // Change this if deploying to a different subdirectory
 const BASE_PATH = '';
 

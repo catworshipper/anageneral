@@ -17,7 +17,7 @@ const FALLBACK_CONFIG = {
     legal_name: 'YOUR_APP_NAME Residency',
     tagline: 'Where the herd gathers',
     address: '123 Main St, Your City, ST 00000',
-    website: 'https://YOUR_DOMAIN',
+    website: 'https://topwebweb.com',
   },
   colors: {
     primary: {

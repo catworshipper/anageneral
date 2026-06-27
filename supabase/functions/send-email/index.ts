@@ -230,7 +230,7 @@ the YOUR_PROPERTY_NAME property AI agent`
             </div>` : ''}
 
             <div style="background:#f5f0eb;border-radius:8px;padding:16px 20px;margin:24px 0;">
-              <p style="margin:0;color:#555;font-size:14px;line-height:1.6;">Please re-familiarize yourself with our key operational guidelines at this link: <a href="https://YOUR_DOMAIN/visiting" style="color:#d4883a;font-weight:600;">YOUR_DOMAIN/visiting</a> &mdash; which also has a map link to the property.</p>
+              <p style="margin:0;color:#555;font-size:14px;line-height:1.6;">Please re-familiarize yourself with our key operational guidelines at this link: <a href="https://topwebweb.com/visiting" style="color:#d4883a;font-weight:600;">topwebweb.com/visiting</a> &mdash; which also has a map link to the property.</p>
             </div>
 
             <div style="background:#fff8e1;border-left:4px solid #f9a825;padding:14px 20px;margin:24px 0;border-radius:0 8px 8px 0;">
@@ -253,7 +253,7 @@ ${data.lease_end_date ? `- Until: ${data.lease_end_date}` : ''}
 Next Steps:
 ${nextStepsText.map((s, i) => `${i + 1}. ${s}`).join('\n')}
 
-Please re-familiarize yourself with our key operational guidelines: https://YOUR_DOMAIN/visiting — which also has a map link to the property.
+Please re-familiarize yourself with our key operational guidelines: https://topwebweb.com/visiting — which also has a map link to the property.
 
 Reminder: Please don't give the address out to potential guests. Instead, send them the visiting link so they can read the guidelines first.
 
@@ -469,7 +469,7 @@ the YOUR_PROPERTY_NAME property AI agent`
 
       // Space link
       const spaceLink = data.space_id
-        ? `<a href="https://YOUR_DOMAIN/spaces/?id=${data.space_id}" style="color:${B.accent};font-weight:600;text-decoration:none;">${data.space_name}</a>`
+        ? `<a href="https://topwebweb.com/spaces/?id=${data.space_id}" style="color:${B.accent};font-weight:600;text-decoration:none;">${data.space_name}</a>`
         : `<strong>${data.space_name}</strong>`;
 
       // Build detail rows using shared dataTable component
@@ -505,7 +505,7 @@ the YOUR_PROPERTY_NAME property AI agent`
 
           ${miPaymentSection}
 
-          ${calloutBox(`<span style="font-size:13px;color:${B.text};line-height:1.5;">&#128218; Please re-familiarize yourself with our <a href="https://YOUR_DOMAIN/visiting" style="color:${B.accent};font-weight:600;">visiting &amp; operational guidelines</a> &mdash; which also has a map link to the property.</span>`)}
+          ${calloutBox(`<span style="font-size:13px;color:${B.text};line-height:1.5;">&#128218; Please re-familiarize yourself with our <a href="https://topwebweb.com/visiting" style="color:${B.accent};font-weight:600;">visiting &amp; operational guidelines</a> &mdash; which also has a map link to the property.</span>`)}
 
           ${calloutBox(`<p style="margin:0;color:${B.textMuted};font-size:12px;line-height:1.5;"><strong style="color:${B.text};">Reminder:</strong> Please don't give the address out to potential guests. Instead, send them the visiting link above so they can read the guidelines first.</p>`, 'warning')}
 
@@ -521,7 +521,7 @@ ${dataTableText(detailRowData)}
 
 ${showPaymentMethods ? paymentMethodsText(data._payment_methods_raw, { memoText: 'rent' }) : ''}
 
-Please re-familiarize yourself with our operational guidelines: https://YOUR_DOMAIN/visiting
+Please re-familiarize yourself with our operational guidelines: https://topwebweb.com/visiting
 
 Reminder: Please don't give the address out to potential guests. Instead, send them the visiting link so they can read the guidelines first.
 
@@ -879,8 +879,8 @@ YOUR_PROPERTY_NAME • 123 Main St, Your City, ST 00000`
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           <p>When you're ready, you can also:</p>
           <ul style="line-height: 1.8;">
-            <li><a href="https://YOUR_DOMAIN/spaces/apply/">Apply for a rental space</a></li>
-            <li><a href="https://YOUR_DOMAIN/spaces/hostevent/">Host an event</a></li>
+            <li><a href="https://topwebweb.com/spaces/apply/">Apply for a rental space</a></li>
+            <li><a href="https://topwebweb.com/spaces/hostevent/">Host an event</a></li>
           </ul>
           <p>If you have any questions or would like to schedule a tour, just reply to this email.</p>
         `,
@@ -897,8 +897,8 @@ You'll be able to see photos, amenities, pricing, and availability for all of ou
 This link is personal to you and will expire in 14 days.
 
 When you're ready, you can also:
-- Apply for a rental space: https://YOUR_DOMAIN/spaces/apply/
-- Host an event: https://YOUR_DOMAIN/spaces/hostevent/
+- Apply for a rental space: https://topwebweb.com/spaces/apply/
+- Host an event: https://topwebweb.com/spaces/hostevent/
 
 If you have any questions or would like to schedule a tour, just reply to this email.
 
@@ -1122,7 +1122,7 @@ After answering, remember to recompile the context so future visitors get better
         subject: `[Website Contact] ${data.subject || 'General Inquiry'}`,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #333; margin-bottom: 4px;">${data.name || 'Someone'} submitted a message from YOUR_DOMAIN</h2>
+            <h2 style="color: #333; margin-bottom: 4px;">${data.name || 'Someone'} submitted a message from topwebweb.com</h2>
             <p style="color: #888; font-size: 13px; margin-top: 0;">${data.subject || 'General Inquiry'}</p>
             ${dataTable([
               { label: 'Name', value: data.name || 'Not provided' },
@@ -1135,7 +1135,7 @@ After answering, remember to recompile the context so future visitors get better
             ${data.email ? `<p style="margin-top: 20px;"><a href="mailto:${data.email}" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 500; font-size: 14px;">Reply to ${data.name || data.email}</a></p>` : ''}
           </div>
         `,
-        text: `${data.name || 'Someone'} submitted a message from YOUR_DOMAIN
+        text: `${data.name || 'Someone'} submitted a message from topwebweb.com
 
 Name: ${data.name || 'Not provided'}
 Email: ${data.email || 'Not provided'}
@@ -1160,7 +1160,7 @@ ${data.message || 'No message'}`
             { label: 'Page', value: `<a href="${data.page_url}">${data.page_name}</a>` },
           ])}
           ${data.message ? `<div style="background: #f8f9fa; padding: 16px; border-radius: 8px; border-left: 4px solid #d4883a; margin: 16px 0; white-space: pre-wrap;">${data.message}</div>` : ''}
-          <p style="margin-top: 20px;"><a href="https://YOUR_DOMAIN/spaces/admin/users.html" style="background: #d4883a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 500;">Manage Users</a></p>
+          <p style="margin-top: 20px;"><a href="https://topwebweb.com/spaces/admin/users.html" style="background: #d4883a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 500;">Manage Users</a></p>
         `,
         text: `Access Request
 
@@ -1173,7 +1173,7 @@ Page: ${data.page_name}
 URL: ${data.page_url}
 ${data.message ? `\nMessage: ${data.message}` : ''}
 
-Manage users: https://YOUR_DOMAIN/spaces/admin/users.html`
+Manage users: https://topwebweb.com/spaces/admin/users.html`
       };
 
     // ===== COMMUNITY FIT INQUIRY =====
@@ -1182,7 +1182,7 @@ Manage users: https://YOUR_DOMAIN/spaces/admin/users.html`
         subject: `[Community Fit] ${data.name || 'New Inquiry'}`,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #333; margin-bottom: 4px;">${data.name || 'Someone'} submitted an inquiry from YOUR_DOMAIN</h2>
+            <h2 style="color: #333; margin-bottom: 4px;">${data.name || 'Someone'} submitted an inquiry from topwebweb.com</h2>
             <p style="color: #888; font-size: 13px; margin-top: 0;">Community Fit Inquiry</p>
 
             ${dataTable([
@@ -1216,10 +1216,10 @@ Manage users: https://YOUR_DOMAIN/spaces/admin/users.html`
             <img src="${data.photo_url}" style="max-width: 200px; border-radius: 8px; border: 1px solid #eee;" />
             ` : ''}
 
-            <p style="margin-top: 24px;"><a href="https://YOUR_DOMAIN/spaces/admin/rentals.html" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 500; font-size: 14px;">View in Rentals Pipeline</a></p>
+            <p style="margin-top: 24px;"><a href="https://topwebweb.com/spaces/admin/rentals.html" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 500; font-size: 14px;">View in Rentals Pipeline</a></p>
           </div>
         `,
-        text: `${data.name || 'Someone'} submitted an inquiry from YOUR_DOMAIN
+        text: `${data.name || 'Someone'} submitted an inquiry from topwebweb.com
 
 Name: ${data.name || 'Not provided'}
 Email: ${data.email || 'Not provided'}
@@ -1460,7 +1460,7 @@ If the fix doesn't look right, submit another bug report and we'll take another 
           ${data.notes ? `<p><strong>Notes:</strong> ${data.notes}</p>` : ''}
 
           <div style="margin: 20px 0;">
-            <a href="https://YOUR_DOMAIN/spaces/admin/appdev.html" style="background: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold; margin-right: 10px;">Review in App Dev Console</a>
+            <a href="https://topwebweb.com/spaces/admin/appdev.html" style="background: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold; margin-right: 10px;">Review in App Dev Console</a>
             ${compareUrl ? `<a href="${compareUrl}" style="background: #3498db; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">View Diff on GitHub</a>` : ''}
           </div>
 
@@ -1489,7 +1489,7 @@ RISK ASSESSMENT:
 
 ${data.notes ? `Notes: ${data.notes}` : ''}
 
-Review in App Dev Console: https://YOUR_DOMAIN/spaces/admin/appdev.html
+Review in App Dev Console: https://topwebweb.com/spaces/admin/appdev.html
 ${compareUrl ? `View diff: ${compareUrl}` : ''}
 
 To deploy: click "Approve & Merge" in the App Dev console, or merge the branch manually on GitHub.
@@ -1505,7 +1505,7 @@ To reject: delete the branch on GitHub.`
       const isReview = data.deploy_decision === 'branched_for_review';
       const isAdminApproved = data.deploy_decision === 'admin_approved';
       const compareUrl = data.branch_name ? `https://github.com/USERNAME/REPO/compare/${data.branch_name}` : '';
-      const pageUrl = data.page_url ? `https://YOUR_DOMAIN${data.page_url}` : '';
+      const pageUrl = data.page_url ? `https://topwebweb.com${data.page_url}` : '';
 
       return {
         senderType: 'claudero',
@@ -1799,7 +1799,7 @@ This is an automated reply from PAI at YOUR_PROPERTY_NAME.`
           <ul>${fileListHtml}</ul>
 
           <p>Files have been uploaded to R2 and added to the <strong>document index</strong> as <strong>inactive</strong> (pending admin review).</p>
-          <p><a href="${data.admin_url || 'https://YOUR_DOMAIN/spaces/admin/manage.html'}" style="background: #3d8b7a; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block;">Review in Admin</a></p>
+          <p><a href="${data.admin_url || 'https://topwebweb.com/spaces/admin/manage.html'}" style="background: #3d8b7a; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block;">Review in Admin</a></p>
         `,
         text: `PAI Document Upload
 
@@ -1853,7 +1853,7 @@ Thank you for signing. If you have any questions, contact us at (737) 747-4737.`
       const suggestion = isClockIn
         ? 'a quick "before" photo of the space before you start working'
         : 'an "after" photo showing your completed work';
-      const workPageUrl = 'https://YOUR_DOMAIN/associates/worktracking.html';
+      const workPageUrl = 'https://topwebweb.com/associates/worktracking.html';
       return {
         subject: `Reminder: Upload ${isClockIn ? 'Before' : 'After'} Photos for Your Work Session`,
         html: `
@@ -1916,7 +1916,7 @@ the YOUR_PROPERTY_NAME property AI agent`
           <div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:16px;margin:0 0 20px;text-align:center;">
             <p style="margin:0;font-weight:700;color:#92400e;font-size:15px;">📸 Before Photos Required</p>
             <p style="margin:8px 0 12px;color:#92400e;font-size:13px;">Take a photo of the work area before you start.</p>
-            <a href="https://YOUR_DOMAIN/associates/worktracking.html" style="display:inline-block;background:#3d8b7a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;">Upload Photos</a>
+            <a href="https://topwebweb.com/associates/worktracking.html" style="display:inline-block;background:#3d8b7a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;">Upload Photos</a>
           </div>
 
           <p style="margin:16px 0 0;color:#7d6f74;font-size:13px;">This is an automated clock-in summary from YOUR_PROPERTY_NAME work tracking.</p>
@@ -1930,7 +1930,7 @@ ${tasks.length > 0 ? tasks.map((t: any) => `• ${t.title}${t.location ? ` (${t.
 
 BEFORE PHOTOS REQUIRED
 Take a photo of the work area before you start.
-Upload: https://YOUR_DOMAIN/associates/worktracking.html
+Upload: https://topwebweb.com/associates/worktracking.html
 
 This is an automated clock-in summary from YOUR_PROPERTY_NAME work tracking.`,
       };
@@ -2143,7 +2143,7 @@ This is an automated summary from YOUR_PROPERTY_NAME work tracking.`
 
           ${todoSection}
 
-          <p style="margin:24px 0 0;font-size:13px;color:#7d6f74;">Clock in at <a href="https://YOUR_DOMAIN/associates/worktracking.html" style="color:#d4883a;">YOUR_DOMAIN</a> to get started. Your task list will be waiting for you.</p>
+          <p style="margin:24px 0 0;font-size:13px;color:#7d6f74;">Clock in at <a href="https://topwebweb.com/associates/worktracking.html" style="color:#d4883a;">topwebweb.com</a> to get started. Your task list will be waiting for you.</p>
         `,
         text: `New Task Assigned to You
 
@@ -2156,7 +2156,7 @@ ${taskLocation ? `Location: ${taskLocation}` : ''}
 
 ${todoTasks.length > 0 ? `Your Prioritized To-Do List:\n${todoText}` : ''}
 
-Clock in at https://YOUR_DOMAIN/associates/worktracking.html to get started.
+Clock in at https://topwebweb.com/associates/worktracking.html to get started.
 
 — YOUR_PROPERTY_NAME`
       };

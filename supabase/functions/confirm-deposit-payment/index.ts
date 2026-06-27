@@ -247,7 +247,7 @@ Deno.serve(async (req) => {
       .eq("id", conf.id);
 
     // Send notification to admin
-    const adminUrl = `https://YOUR_DOMAIN/spaces/admin/rentals.html#applicant=${application.id}`;
+    const adminUrl = `https://topwebweb.com/spaces/admin/rentals.html#applicant=${application.id}`;
     const overpayStr = remaining > 0 ? `<p style="color:#e74c3c;"><strong>Overpayment:</strong> $${remaining.toFixed(2)} exceeds deposits owed.</p>` : "";
 
     try {

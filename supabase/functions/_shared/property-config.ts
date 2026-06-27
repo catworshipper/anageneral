@@ -19,7 +19,7 @@ const FALLBACK_CONFIG: Record<string, any> = {
     timezone: "America/Chicago",
   },
   domain: {
-    primary: "YOUR_DOMAIN",
+    primary: "topwebweb.com",
     github_pages: "USERNAME.github.io/REPO",
     camera_proxy: "YOUR_CAMERA_PROXY",
   },

@@ -271,7 +271,7 @@ Deno.serve(async (req) => {
   }
 });
 
-const WORK_PAGE_URL = 'https://YOUR_DOMAIN/associates/worktracking.html';
+const WORK_PAGE_URL = 'https://topwebweb.com/associates/worktracking.html';
 
 function buildHtml(firstName: string, phase: 'clock_in' | 'clock_out', spaceName: string): string {
   const isClockIn = phase === 'clock_in';

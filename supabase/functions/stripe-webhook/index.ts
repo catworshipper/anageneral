@@ -279,7 +279,7 @@ async function sendPaymentConfirmation(
           </div>
         `).join('')}
         <div style="text-align:center;margin-top:12px;">
-          <a href="https://YOUR_DOMAIN/pay/?amount=${balanceDue}&person_id=${row.person_id}&person_name=${encodeURIComponent(person.first_name + ' ' + person.last_name)}&email=${encodeURIComponent(person.email)}&description=${encodeURIComponent('Remaining balance')}&payment_type=rent&reference_type=assignment${assignments?.length ? '&reference_id=' + assignments[0].id : ''}" style="display:inline-block;background:linear-gradient(135deg,#e65100 0%,#bf360c 100%);color:white;padding:12px 32px;text-decoration:none;border-radius:8px;font-size:15px;font-weight:700;">Pay ${formatCurrency(balanceDue)} Now</a>
+          <a href="https://topwebweb.com/pay/?amount=${balanceDue}&person_id=${row.person_id}&person_name=${encodeURIComponent(person.first_name + ' ' + person.last_name)}&email=${encodeURIComponent(person.email)}&description=${encodeURIComponent('Remaining balance')}&payment_type=rent&reference_type=assignment${assignments?.length ? '&reference_id=' + assignments[0].id : ''}" style="display:inline-block;background:linear-gradient(135deg,#e65100 0%,#bf360c 100%);color:white;padding:12px 32px;text-decoration:none;border-radius:8px;font-size:15px;font-weight:700;">Pay ${formatCurrency(balanceDue)} Now</a>
         </div>
       </div>`
     : `<div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:16px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
@@ -341,7 +341,7 @@ Hi ${person.first_name},
 
 We've received your payment of ${formatCurrency(row.amount)} for ${paymentTypeLabel} (${spaceName}).
 
-${balanceDue > 0 ? `Outstanding balance: ${formatCurrency(balanceDue)}\nPay now: https://YOUR_DOMAIN/pay/?amount=${balanceDue}&person_id=${row.person_id}` : 'You\'re all caught up! No outstanding balance.'}
+${balanceDue > 0 ? `Outstanding balance: ${formatCurrency(balanceDue)}\nPay now: https://topwebweb.com/pay/?amount=${balanceDue}&person_id=${row.person_id}` : 'You\'re all caught up! No outstanding balance.'}
 
 Thank you!
 YOUR_PROPERTY_NAME`;

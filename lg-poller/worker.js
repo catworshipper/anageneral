@@ -18,7 +18,7 @@ const API_DELAY_MS = parseInt(process.env.API_DELAY_MS || '1000'); // 1s between
 const FCM_PROJECT_ID = process.env.FCM_PROJECT_ID || '';
 const GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS || '';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
-const RESEND_FROM = process.env.RESEND_FROM || 'YOUR_APP_NAME <noreply@YOUR_DOMAIN>';
+const RESEND_FROM = process.env.RESEND_FROM || 'YOUR_APP_NAME <noreply@topwebweb.com>';
 
 if (!SUPABASE_SERVICE_KEY) {
   console.error('SUPABASE_SERVICE_ROLE_KEY environment variable is required');
@@ -209,13 +209,13 @@ async function sendEmailNotification(emails, typeLabel) {
       <p style="margin:0 0 16px;color:#444;font-size:15px;">
         Your ${typeLabel.toLowerCase()} cycle has finished. Time to grab your laundry!
       </p>
-      <a href="https://YOUR_DOMAIN/residents/appliances.html"
+      <a href="https://topwebweb.com/residents/appliances.html"
          style="display:inline-block;background:#d97706;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;">
         View Appliances
       </a>
       <p style="margin:16px 0 0;color:#999;font-size:12px;">YOUR_PROPERTY_NAME</p>
     </div>`;
-  const text = `${typeLabel} Cycle Complete\n\nYour ${typeLabel.toLowerCase()} cycle has finished. Time to grab your laundry!\n\nView: https://YOUR_DOMAIN/residents/appliances.html`;
+  const text = `${typeLabel} Cycle Complete\n\nYour ${typeLabel.toLowerCase()} cycle has finished. Time to grab your laundry!\n\nView: https://topwebweb.com/residents/appliances.html`;
 
   try {
     const response = await fetch('https://api.resend.com/emails', {

@@ -35,7 +35,7 @@ function buildContextPrompt(contextData: ContextData): string {
   parts.push(`GENERAL INFO:
 - Location: 123 Main Stive, Your City, TX 00000 (30 minutes east of Austin)
 - Contact: team@topwebweb.com
-- Website: YOUR_DOMAIN`);
+- Website: topwebweb.com`);
 
   // Add spaces info
   if (contextData.spaces?.length) {
@@ -118,10 +118,10 @@ IMPORTANT INSTRUCTIONS:
 3. At the end of your response, include a confidence assessment in this exact format on a new line:
    CONFIDENCE: HIGH (if you're very confident the answer is accurate based on context)
    CONFIDENCE: LOW (if you're unsure, making assumptions, or the context doesn't cover this topic)
-4. For rental inquiries, mention they can apply at https://YOUR_DOMAIN/spaces/apply/
-5. For event hosting, mention they can apply at https://YOUR_DOMAIN/events/
+4. For rental inquiries, mention they can apply at https://topwebweb.com/spaces/apply/
+5. For event hosting, mention they can apply at https://topwebweb.com/events/
 6. Keep responses under 200 words unless more detail is needed.
-7. If someone asks you to PERFORM AN ACTION (turn on/off lights, play music, control thermostats, lock/unlock cars, etc.), politely explain that you can only answer questions — you cannot control devices or take actions. If they are a current resident, suggest they use the resident portal at https://YOUR_DOMAIN/residents/ for smart home controls.
+7. If someone asks you to PERFORM AN ACTION (turn on/off lights, play music, control thermostats, lock/unlock cars, etc.), politely explain that you can only answer questions — you cannot control devices or take actions. If they are a current resident, suggest they use the resident portal at https://topwebweb.com/residents/ for smart home controls.
 8. If a question is completely unrelated to YOUR_PROPERTY_NAME (e.g. general trivia, coding help, personal advice), politely redirect and say you're here to help with questions about YOUR_PROPERTY_NAME.
 
 CONTEXT ABOUT ALPACA PLAYHOUSE:

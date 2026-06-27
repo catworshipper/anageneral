@@ -234,7 +234,7 @@ Deno.serve(async (req) => {
               <p><strong>Quick Reminders:</strong></p>
               <ul>
                 <li>Setup crew must arrive 90 minutes before your event</li>
-                <li>Direct attendees to <a href="https://YOUR_DOMAIN/visiting">YOUR_DOMAIN/visiting</a> for directions (do NOT post the address publicly)</li>
+                <li>Direct attendees to <a href="https://topwebweb.com/visiting">topwebweb.com/visiting</a> for directions (do NOT post the address publicly)</li>
                 <li>Cleanup must be completed by 1:01pm the day after your event</li>
               </ul>
 
@@ -269,7 +269,7 @@ ${eventTimeFormatted ? `Time: ${eventTimeFormatted}` : ''}
 QUICK REMINDERS
 ---------------
 - Setup crew must arrive 90 minutes before your event
-- Direct attendees to YOUR_DOMAIN/visiting for directions (do NOT post the address publicly)
+- Direct attendees to topwebweb.com/visiting for directions (do NOT post the address publicly)
 - Cleanup must be completed by 1:01pm the day after your event
 
 Questions? Reply to this email or contact us at team@topwebweb.com

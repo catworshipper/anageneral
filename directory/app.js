@@ -1,6 +1,6 @@
 /**
  * Personal Directory Page
- * Renders a user's profile at YOUR_DOMAIN/{slug}
+ * Renders a user's profile at topwebweb.com/{slug}
  * Privacy-aware: respects privacy_settings per field
  */
 import { supabase } from '../shared/supabase.js';
