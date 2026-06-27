@@ -1,12 +1,12 @@
 {
-  "version": "v260627.02 2:36p",
-  "release": 2,
-  "sha": "ff10a0f",
-  "fullSha": "ff10a0f3b37ad5d0dbd652c69e31cebb779ae61e",
+  "version": "v260627.03 2:36p",
+  "release": 3,
+  "sha": "9a8690b",
+  "fullSha": "9a8690bd2c9f47efd7a7659cd0ecab7d6c02a124",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-27T16:35:43+02:00",
-  "commits": [{"sha":"ff10a0f","message":"Gate /indocs via Cloudflare Access; remove client-side Supabase auth gate","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-27T16:36:40+02:00",
+  "commits": [{"sha":"9a8690b","message":"Remove leftover loading placeholder from QA report","author":"AnastasiaBordiuh"}]
 }
