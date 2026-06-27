@@ -29,14 +29,6 @@
       line-height: 1.6;
       min-height: 100vh;
     }
-    body:not(.ready) .wrap { display: none; }
-    .loading {
-      position: fixed; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); font-size: 0.95rem;
-    }
-    body.ready .loading { display: none; }
-
     .wrap { max-width: 920px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
 
     .badge {
@@ -505,17 +497,7 @@
     <a href="/indocs/" class="back">&larr; Back to internal docs</a>
   </div>
 
-  <script src="/vendor/supabase-js-2.39.3.min.js"></script>
-  <script type="module">
-    import { initAuth, requireRole } from '/shared/auth.js';
-
-    (async () => {
-      await initAuth();
-      // Guard: staff role or higher (staff, admin, oracle). Redirects otherwise.
-      if (requireRole('staff')) {
-        document.body.classList.add('ready');
-      }
-    })();
-  </script>
+  <!-- Access control is enforced at the edge by Cloudflare Access on /indocs/*.
+       No client-side auth gate (the Supabase backend is not set up). -->
 </body>
 </html>
