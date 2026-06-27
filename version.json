@@ -1,12 +1,12 @@
 {
-  "version": "v260627.01 12:53p",
-  "release": 1,
-  "sha": "40f6281",
-  "fullSha": "40f62819c75b2693a70b6dbd8bf56d013613cf79",
+  "version": "v260627.02 2:36p",
+  "release": 2,
+  "sha": "ff10a0f",
+  "fullSha": "ff10a0f3b37ad5d0dbd652c69e31cebb779ae61e",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-27T14:53:17+02:00",
-  "commits": [{"sha":"40f6281","message":"Replace YOUR_DOMAIN placeholder with topwebweb.com across shipped code","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-06-27T16:35:43+02:00",
+  "commits": [{"sha":"ff10a0f","message":"Gate /indocs via Cloudflare Access; remove client-side Supabase auth gate","author":"AnastasiaBordiuh"}]
 }
