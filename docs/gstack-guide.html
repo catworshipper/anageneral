@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gstack — Project Guide</title>
+  <meta name="description" content="How to use gstack — the Claude Code skill suite — on this project (alpacaplayhouse.com, static HTML/JS).">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="gstack — Project Guide">
+  <meta property="og:description" content="How to use gstack — the Claude Code skill suite — on this project (alpacaplayhouse.com, static HTML/JS).">
+  <meta property="og:url" content="https://alpacaplayhouse.com/docs/gstack-guide.html">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --surface: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #6b7280;
+      --border: #e5e2dc;
+      --accent: #3d8b7a;
+      --accent-soft: #e7f1ee;
+      --green: #2f9e6f;
+      --amber: #c98a1b;
+      --red: #c2553f;
+      --gray: #9ca3af;
+      --shadow: 0 1px 2px rgba(26,26,46,0.04), 0 8px 24px rgba(26,26,46,0.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #17171f;
+        --surface: #1f1f2b;
+        --text: #eceaf4;
+        --text-muted: #9b9bb0;
+        --border: #33333f;
+        --accent: #52c4a8;
+        --accent-soft: #1d3630;
+        --green: #3ec98a;
+        --amber: #e0a63a;
+        --red: #e07361;
+        --gray: #71718a;
+        --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.35);
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+    .badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      border-radius: 999px; padding: 0.2rem 0.7rem; margin-bottom: 1.1rem;
+    }
+    h1 { font-size: 2.3rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.4rem; }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.4rem; font-size: 1.02rem; }
+    .meta-line { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2.4rem; }
+
+    h2 {
+      font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
+      margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h2 .num { color: var(--accent); font-weight: 700; margin-right: 0.5rem; }
+    h3 { font-size: 0.98rem; font-weight: 650; margin: 1.4rem 0 0.5rem; }
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); }
+    ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.35rem; }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      font-size: 0.86em;
+    }
+    pre {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 0.75rem 0 1rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      box-shadow: var(--shadow);
+    }
+    pre code { background: none; color: inherit; padding: 0; }
+
+    /* ---- Golden rule callout ---- */
+    .tldr {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .tldr h3 { font-size: 0.95rem; margin: 0 0 0.6rem; color: var(--accent); }
+    .tldr p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+    .tldr p:last-child { margin-bottom: 0; }
+    .tldr strong { color: var(--text); }
+    .tldr code.no { color: var(--red); background: rgba(194,85,63,0.12); }
+
+    /* ---- Cards (playbook) ---- */
+    .cards { display: flex; flex-direction: column; gap: 1.1rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.3rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+    .card-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+    .card-head h3 { font-size: 1.05rem; font-weight: 700; margin: 0; }
+    .card-tag {
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.12rem 0.5rem; border-radius: 6px; background: var(--accent-soft); color: var(--accent);
+      white-space: nowrap;
+    }
+    .card p { font-size: 0.92rem; margin-bottom: 0.6rem; }
+    .card .note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 0; }
+    .prompt {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.84rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--text);
+      margin: 0.5rem 0 0.7rem;
+      white-space: pre-wrap;
+    }
+
+    /* ---- Reference table ---- */
+    .group-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-muted); margin: 1.8rem 0 0.6rem;
+    }
+    .group-label:first-child { margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 0.5rem; }
+    th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+    td.w { font-weight: 700; color: var(--accent); white-space: nowrap; }
+    td.when { color: var(--text-muted); }
+
+    .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; font-size: 0.9rem; }
+    @media (max-width: 640px) { .links-grid { grid-template-columns: 1fr; } }
+    .links-grid .path { display: block; font-size: 0.78rem; color: var(--text-muted); font-family: 'SF Mono', 'Fira Code', monospace; }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .callout.warning { border-left-color: var(--red); background: rgba(194,85,63,0.1); }
+
+    .back { display: inline-block; margin-top: 3rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+    .back:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .card-head { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <span data-site-version style="display:none;">v260627.02 2:36p</span>
+
+  <div class="wrap">
+    <span class="badge">Internal · Tooling</span>
+    <h1>gstack — Project Guide</h1>
+    <p class="subtitle">How to use the gstack Claude Code skill suite on this project.</p>
+    <p class="meta-line">alpacaplayhouse.com · static HTML/JS, no server-side code · gstack installed at <code>~/.claude/skills/gstack</code></p>
+
+    <div class="tldr">
+      <h3>▸ The golden rule</h3>
+      <p>Use <strong>/browse</strong> for all web browsing — real headless Chromium, real clicks, real screenshots, purpose-built for QA and automation.</p>
+      <p>Never use <code class="no">mcp__claude-in-chrome__*</code> / <code class="no">mcp__Claude_in_Chrome__*</code> tools in this project. This is enforced in <a href="https://github.com/catworshipper/anageneral/blob/main/CLAUDE.md">CLAUDE.md</a>'s <code>## gstack</code> section.</p>
+    </div>
+
+    <!-- ============ 1. WHAT IS GSTACK ============ -->
+    <h2><span class="num">01</span>What is gstack</h2>
+    <p>gstack is a free, MIT-licensed suite of Claude Code skills built by Garry Tan (YC). It bundles a real headless-browser tool (<code>/browse</code>) with ~30 slash-command "specialists" that mirror a small engineering team — a product interrogator, an eng manager, a designer, a code reviewer, a QA lead, a security officer, and a release engineer — so a solo builder can run a full think → plan → build → review → test → ship → reflect sprint from inside one Claude Code session.</p>
+    <p>Everything is a Markdown skill file plus the bundled browser binary. No paid tier, no account required to use it locally.</p>
+
+    <!-- ============ 2. HOW TO INVOKE ============ -->
+    <h2><span class="num">02</span>How to invoke a skill</h2>
+    <p>Two ways:</p>
+    <ul>
+      <li>Type the slash command directly in Claude Code, e.g. <code>/qa https://alpacaplayhouse.com</code></li>
+      <li>Tell a fresh session in plain language — useful when kicking off a sub-agent or a new terminal: <code>Load gstack. Run /qa https://alpacaplayhouse.com</code></li>
+    </ul>
+    <p>Skills chain naturally — most read the output of the skill before them (e.g. <code>/office-hours</code> writes a design doc that <code>/plan-ceo-review</code> reads).</p>
+
+    <!-- ============ 3. PROJECT PLAYBOOK ============ -->
+    <h2><span class="num">03</span>Project playbook — mapped to our workflow</h2>
+    <p>This project is a static HTML/JS site with no server-side code (browser → Cloudflare Pages → Supabase). Push to <code>main</code> auto-deploys — that changes how a few skills apply here versus a typical backend project. Notes are called out below.</p>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-head"><h3>Ship / deploy</h3><span class="card-tag">/ship → /land-and-deploy</span></div>
+        <p><code>/ship</code> syncs main, runs tests, audits coverage, pushes, and opens a PR. <code>/land-and-deploy</code> merges it, waits for CI + the Cloudflare Pages deploy, and verifies production health — one command from "approved" to "verified live."</p>
+        <div class="prompt">/ship
+&gt; PR opens against main
+/land-and-deploy</div>
+        <p class="note">Since this repo pushes straight to main per CLAUDE.md's mandatory behaviors, <code>/ship</code>'s PR step is optional here — many changes just get pushed directly and verified with <code>/qa</code> after.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Pre-landing review</h3><span class="card-tag">/review · /codex</span></div>
+        <p><code>/review</code> is a staff-engineer pass over the diff — finds bugs that pass CI but blow up in prod, auto-fixes the obvious ones. <code>/codex</code> gets an independent second opinion from OpenAI's Codex CLI on the same diff.</p>
+        <div class="prompt">/review
+/codex</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Test a live page</h3><span class="card-tag">/qa · /qa-only + /browse</span></div>
+        <p><code>/qa</code> opens a real browser against a URL, clicks through flows, finds bugs, fixes them, and writes a regression test. <code>/qa-only</code> runs the same methodology but reports without touching code. <code>/browse</code> is the underlying tool for one-off manual checks.</p>
+        <div class="prompt">/qa https://alpacaplayhouse.com/residents/
+/qa-only https://alpacaplayhouse.com/spaces/</div>
+        <p class="note">This is the highest-value skill for this project — a static site with real Supabase-backed forms and portals is exactly what a headless browser QA pass is built to catch.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Debug</h3><span class="card-tag">/investigate</span></div>
+        <p>Systematic root-cause debugging — Iron Law: no fixes without investigation. Traces data flow, tests hypotheses, stops after 3 failed attempts instead of thrashing.</p>
+        <div class="prompt">/investigate the reservation form on /spaces/ silently fails to submit</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Security</h3><span class="card-tag">/cso</span></div>
+        <p>OWASP Top 10 + STRIDE threat model with an 8/10+ confidence gate and independent finding verification — each finding ships with a concrete exploit scenario.</p>
+        <div class="prompt">/cso</div>
+        <p class="note">Worth running against <code>docs/CREDENTIALS.md</code>-adjacent code and anywhere Supabase row-level security is load-bearing, given the backend here is still lightly provisioned.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Post-ship</h3><span class="card-tag">/document-release · /retro</span></div>
+        <p><code>/document-release</code> reads the diff and updates every doc that drifted (README, CLAUDE.md, this guide, etc.) — catches stale docs automatically. <code>/retro</code> runs a team-aware weekly retrospective.</p>
+        <div class="prompt">/document-release
+/retro</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Plan first</h3><span class="card-tag">/office-hours → /autoplan</span></div>
+        <p><code>/office-hours</code> is the forcing-question interrogation that turns a vague feature request into a real design doc before any code is written. <code>/autoplan</code> then runs CEO → design → eng review on that doc automatically, surfacing only the taste decisions for approval. For a single-lens pass, use <code>/plan-ceo-review</code> or <code>/plan-eng-review</code> directly.</p>
+        <div class="prompt">/office-hours
+&gt; describe the feature
+/autoplan</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>Design</h3><span class="card-tag">/design-shotgun · /design-review · /design-html · /plan-design-review</span></div>
+        <p><code>/design-shotgun</code> generates 4-6 mockup variants and opens a comparison board for you to pick and iterate on. <code>/design-html</code> turns an approved mockup into real, responsive HTML/CSS — matching this project's "single self-contained page" convention well. <code>/design-review</code> / <code>/plan-design-review</code> audit AI-slop and design quality before or after shipping.</p>
+        <div class="prompt">/design-shotgun a warm-paper style internal report page
+/design-html
+/design-review</div>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <strong>Less relevant here:</strong> skills built around a backend or app-store surface — <code>/benchmark</code> (Core Web Vitals still apply, but this is a lightweight static site), <code>/plan-devex-review</code> / <code>/devex-review</code> (matter more for SDKs/CLIs than an internal admin tool), and the <code>/ios-*</code> family (no native app in this project).
+    </div>
+
+    <!-- ============ 4. QUICK REFERENCE ============ -->
+    <h2><span class="num">04</span>Quick reference — all installed skills</h2>
+
+    <div class="group-label">Plan</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/office-hours</td><td>Forcing-question product interrogation. Writes a design doc every downstream skill reads.</td><td class="when">Start of any non-trivial feature.</td></tr>
+      <tr><td class="w">/plan-ceo-review</td><td>Rethinks scope — Expansion / Selective Expansion / Hold Scope / Reduction.</td><td class="when">Before committing to a feature's scope.</td></tr>
+      <tr><td class="w">/plan-eng-review</td><td>Locks architecture, data flow, edge cases, test plan.</td><td class="when">Any change touching Supabase schema or shared JS modules.</td></tr>
+      <tr><td class="w">/plan-design-review</td><td>Rates each design dimension 0-10, AI-slop detection, interactive.</td><td class="when">Before building a new resident/admin page.</td></tr>
+      <tr><td class="w">/plan-devex-review</td><td>Interactive DX review of onboarding/API surfaces.</td><td class="when">Rare here — no external SDK/API surface.</td></tr>
+      <tr><td class="w">/autoplan</td><td>Runs CEO → design → eng (→ DX) review automatically.</td><td class="when">Default "just plan it well" entry point.</td></tr>
+    </table>
+
+    <div class="group-label">Build / Ship</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/ship</td><td>Sync main, run tests, audit coverage, push, open PR.</td><td class="when">Any change ready to land — PR step optional given this repo's direct-to-main flow.</td></tr>
+      <tr><td class="w">/land-and-deploy</td><td>Merge PR, wait for CI + deploy, verify production health.</td><td class="when">After a PR is approved.</td></tr>
+      <tr><td class="w">/canary</td><td>Post-deploy monitoring loop for console errors and regressions.</td><td class="when">Right after a push to main.</td></tr>
+      <tr><td class="w">/benchmark</td><td>Baseline page load, Core Web Vitals, resource sizes.</td><td class="when">Before/after changes to hero/landing pages.</td></tr>
+      <tr><td class="w">/document-release</td><td>Updates every doc that drifted from the shipped diff.</td><td class="when">After any /ship or direct push.</td></tr>
+      <tr><td class="w">/design-consultation</td><td>Builds a design system from scratch.</td><td class="when">Rare — this project already has a warm-paper theme convention.</td></tr>
+      <tr><td class="w">/design-shotgun</td><td>4-6 AI mockup variants + comparison board, taste memory.</td><td class="when">New standalone doc/report pages.</td></tr>
+      <tr><td class="w">/design-html</td><td>Turns an approved mockup into shippable, responsive HTML.</td><td class="when">Matches this repo's self-contained-page convention.</td></tr>
+    </table>
+
+    <div class="group-label">Test / QA</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/qa</td><td>Real-browser test pass; finds bugs, fixes them, writes regression tests.</td><td class="when">Any resident/admin/public page with interactive forms.</td></tr>
+      <tr><td class="w">/qa-only</td><td>Same methodology, report-only, no code changes.</td><td class="when">Sanity-checking staging before a push.</td></tr>
+      <tr><td class="w">/review</td><td>Staff-engineer diff review; auto-fixes obvious bugs.</td><td class="when">Before every push of non-trivial JS/HTML.</td></tr>
+      <tr><td class="w">/investigate</td><td>Root-cause debugging methodology, no fixes before diagnosis.</td><td class="when">Any "it's silently broken" report.</td></tr>
+      <tr><td class="w">/design-review</td><td>Live design audit + fixes, before/after screenshots.</td><td class="when">After shipping a new page.</td></tr>
+      <tr><td class="w">/devex-review</td><td>Live onboarding/DX audit against the plan-stage score.</td><td class="when">Rare here.</td></tr>
+    </table>
+
+    <div class="group-label">Browser</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/browse</td><td>The core headless-Chromium tool: real clicks, real screenshots, ~100ms/command. <a href="https://github.com/garrytan/gstack/blob/main/BROWSER.md">Full command reference →</a></td><td class="when">Every browser interaction in this project — see the golden rule above.</td></tr>
+      <tr><td class="w">/connect-chrome</td><td>Connects gstack to your real Chrome for authenticated sessions.</td><td class="when">Testing pages behind Cloudflare Access (e.g. <code>/indocs</code>).</td></tr>
+      <tr><td class="w">/setup-browser-cookies</td><td>Imports cookies from Chrome/Arc/Brave/Edge into the headless session.</td><td class="when">Testing the resident portal or admin auth flows.</td></tr>
+    </table>
+
+    <div class="group-label">Security</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/cso</td><td>OWASP Top 10 + STRIDE audit, zero-noise, concrete exploit scenarios.</td><td class="when">Before shipping anything touching Supabase RLS or auth.</td></tr>
+      <tr><td class="w">/codex</td><td>Independent OpenAI Codex CLI review — cross-model second opinion.</td><td class="when">Alongside /review on any change you want extra confidence on.</td></tr>
+    </table>
+
+    <div class="group-label">Maintenance</div>
+    <table>
+      <tr><th>Skill</th><th>What it does</th><th>When to use here</th></tr>
+      <tr><td class="w">/retro</td><td>Team-aware weekly retro — shipping streaks, test health, growth areas.</td><td class="when">Weekly, or after a big push.</td></tr>
+      <tr><td class="w">/setup-deploy</td><td>One-time platform/URL/deploy-command detection for /land-and-deploy.</td><td class="when">Already configured — re-run only if the deploy target changes.</td></tr>
+      <tr><td class="w">/setup-gbrain</td><td>Onboards a persistent cross-session memory backend (GBrain).</td><td class="when">Optional; see <a href="https://github.com/garrytan/gstack/blob/main/USING_GBRAIN_WITH_GSTACK.md">USING_GBRAIN_WITH_GSTACK.md</a>.</td></tr>
+      <tr><td class="w">/careful</td><td>Warns before destructive commands (rm -rf, DROP TABLE, force-push).</td><td class="when">Any migration or prod-data work.</td></tr>
+      <tr><td class="w">/freeze</td><td>Restricts edits to one directory.</td><td class="when">Scoped debugging sessions.</td></tr>
+      <tr><td class="w">/guard</td><td>/careful + /freeze together.</td><td class="when">Maximum-safety prod work.</td></tr>
+      <tr><td class="w">/unfreeze</td><td>Removes the /freeze boundary.</td><td class="when">After scoped work is done.</td></tr>
+      <tr><td class="w">/gstack-upgrade</td><td>Upgrades gstack to latest, syncs global + vendored install.</td><td class="when">Periodically, or when a skill misbehaves.</td></tr>
+      <tr><td class="w">/learn</td><td>Reviews, searches, and prunes cross-session learnings.</td><td class="when">Occasional cleanup of accumulated context.</td></tr>
+    </table>
+
+    <!-- ============ 5. LEARN MORE ============ -->
+    <h2><span class="num">05</span>Learn more</h2>
+    <p>Authoritative docs ship with gstack itself — GitHub copies for sharing, local paths for quick reference on this machine.</p>
+    <div class="links-grid">
+      <div>
+        <a href="https://github.com/garrytan/gstack">Repo — garrytan/gstack</a>
+        <span class="path">~/.claude/skills/gstack/</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/README.md">README.md</a>
+        <span class="path">~/.claude/skills/gstack/README.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/ARCHITECTURE.md">ARCHITECTURE.md</a>
+        <span class="path">~/.claude/skills/gstack/ARCHITECTURE.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/BROWSER.md">BROWSER.md</a>
+        <span class="path">~/.claude/skills/gstack/BROWSER.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+        <span class="path">~/.claude/skills/gstack/CONTRIBUTING.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/ETHOS.md">ETHOS.md</a>
+        <span class="path">~/.claude/skills/gstack/ETHOS.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/SKILL.md">SKILL.md</a>
+        <span class="path">~/.claude/skills/gstack/SKILL.md</span>
+      </div>
+      <div>
+        <a href="https://github.com/garrytan/gstack/blob/main/USING_GBRAIN_WITH_GSTACK.md">USING_GBRAIN_WITH_GSTACK.md</a>
+        <span class="path">~/.claude/skills/gstack/USING_GBRAIN_WITH_GSTACK.md</span>
+      </div>
+      <div>
+        <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code docs</a>
+        <span class="path">docs.anthropic.com/en/docs/claude-code</span>
+      </div>
+    </div>
+
+    <a href="/docs/" class="back">&larr; Back to docs</a>
+  </div>
+
+  <script type="module" src="/shared/version-info.js"></script>
+</body>
+</html>
