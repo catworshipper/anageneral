@@ -1,12 +1,12 @@
 {
-  "version": "v260627.03 2:36p",
-  "release": 3,
-  "sha": "9a8690b",
-  "fullSha": "9a8690bd2c9f47efd7a7659cd0ecab7d6c02a124",
+  "version": "v260701.01 11:34a",
+  "release": 1,
+  "sha": "84c829c",
+  "fullSha": "84c829c6ecb0e11d4a0d638a7a2198a1fc8aaec3",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
   "machine": "runnervmmklqx",
-  "pushedAt": "2026-06-27T16:36:40+02:00",
-  "commits": [{"sha":"9a8690b","message":"Remove leftover loading placeholder from QA report","author":"AnastasiaBordiuh"}]
+  "pushedAt": "2026-07-01T13:34:11+02:00",
+  "commits": [{"sha":"84c829c","message":"Add gstack project guide and wire it into docs index","author":"AnastasiaBordiuh"}]
 }
