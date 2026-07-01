@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gstack — Project Guide</title>
-  <meta name="description" content="How to use gstack — the Claude Code skill suite — on this project (alpacaplayhouse.com, static HTML/JS).">
+  <meta name="description" content="How to use gstack — the Claude Code skill suite — on this project (topwebweb.com, static HTML/JS).">
   <meta name="robots" content="noindex">
   <meta property="og:title" content="gstack — Project Guide">
-  <meta property="og:description" content="How to use gstack — the Claude Code skill suite — on this project (alpacaplayhouse.com, static HTML/JS).">
-  <meta property="og:url" content="https://alpacaplayhouse.com/docs/gstack-guide.html">
+  <meta property="og:description" content="How to use gstack — the Claude Code skill suite — on this project (topwebweb.com, static HTML/JS).">
+  <meta property="og:url" content="https://topwebweb.com/docs/gstack-guide.html">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
@@ -180,7 +180,7 @@
     <span class="badge">Internal · Tooling</span>
     <h1>gstack — Project Guide</h1>
     <p class="subtitle">How to use the gstack Claude Code skill suite on this project.</p>
-    <p class="meta-line">alpacaplayhouse.com · static HTML/JS, no server-side code · gstack installed at <code>~/.claude/skills/gstack</code></p>
+    <p class="meta-line">topwebweb.com · static HTML/JS, no server-side code · gstack installed at <code>~/.claude/skills/gstack</code></p>
 
     <div class="tldr">
       <h3>▸ The golden rule</h3>
@@ -197,8 +197,8 @@
     <h2><span class="num">02</span>How to invoke a skill</h2>
     <p>Two ways:</p>
     <ul>
-      <li>Type the slash command directly in Claude Code, e.g. <code>/qa https://alpacaplayhouse.com</code></li>
-      <li>Tell a fresh session in plain language — useful when kicking off a sub-agent or a new terminal: <code>Load gstack. Run /qa https://alpacaplayhouse.com</code></li>
+      <li>Type the slash command directly in Claude Code, e.g. <code>/qa https://topwebweb.com</code></li>
+      <li>Tell a fresh session in plain language — useful when kicking off a sub-agent or a new terminal: <code>Load gstack. Run /qa https://topwebweb.com</code></li>
     </ul>
     <p>Skills chain naturally — most read the output of the skill before them (e.g. <code>/office-hours</code> writes a design doc that <code>/plan-ceo-review</code> reads).</p>
 
@@ -227,8 +227,8 @@
       <div class="card">
         <div class="card-head"><h3>Test a live page</h3><span class="card-tag">/qa · /qa-only + /browse</span></div>
         <p><code>/qa</code> opens a real browser against a URL, clicks through flows, finds bugs, fixes them, and writes a regression test. <code>/qa-only</code> runs the same methodology but reports without touching code. <code>/browse</code> is the underlying tool for one-off manual checks.</p>
-        <div class="prompt">/qa https://alpacaplayhouse.com/residents/
-/qa-only https://alpacaplayhouse.com/spaces/</div>
+        <div class="prompt">/qa https://topwebweb.com/residents/
+/qa-only https://topwebweb.com/spaces/</div>
         <p class="note">This is the highest-value skill for this project — a static site with real Supabase-backed forms and portals is exactly what a headless browser QA pass is built to catch.</p>
       </div>
 
