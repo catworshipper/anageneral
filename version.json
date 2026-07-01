@@ -1,12 +1,12 @@
 {
-  "version": "v260701.02 11:37a",
-  "release": 2,
-  "sha": "033c825",
-  "fullSha": "033c8255e83463db9f4d8de9be5fac2392778739",
+  "version": "v260701.03 12:11p",
+  "release": 3,
+  "sha": "3936e6b",
+  "fullSha": "3936e6baa56de1295c177f205787be7805a646b1",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
-  "machine": "runnervmkkn4f",
-  "pushedAt": "2026-07-01T13:37:03+02:00",
-  "commits": [{"sha":"033c825","message":"Point gstack guide at topwebweb.com, the project's actual live domain","author":"AnastasiaBordiuh"}]
+  "machine": "runnervmmklqx",
+  "pushedAt": "2026-07-01T14:11:29+02:00",
+  "commits": [{"sha":"3936e6b","message":"Add owner-email allowlist so the site owner is never locked out of client-gated pages","author":"AnastasiaBordiuh"}]
 }
