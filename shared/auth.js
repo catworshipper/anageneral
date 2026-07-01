@@ -7,6 +7,42 @@ const INIT_TIMEOUT_MS = 10000; // 10 seconds for initial auth check
 const CACHED_AUTH_KEY = 'ana-cached-auth';
 const CACHED_AUTH_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
+// Owner allowlist — these emails always resolve to the top ('oracle') role, even
+// when the Supabase backend is unreachable or has no app_users row for them. This
+// is a convenience safety net so the site owner can never be locked out of their
+// own pages. NOTE: the client role gate is a UX layer only — real access control is
+// Supabase RLS — so this is not a security boundary, just a never-lock-me-out guard.
+// Add more addresses (lowercase) to grant the same always-on access.
+const OWNER_EMAILS = ['anastasia.bordiuh@gmail.com'];
+
+// Permissions object that grants everything. Used for the synthetic owner identity
+// so permission-gated pages don't hang or deny when real permissions can't be
+// fetched. Shaped like the subset of Set the code uses (.has / .size); never
+// iterated or serialized, so a plain object is safe.
+const ALL_ACCESS_PERMISSIONS = { has: () => true, size: Infinity };
+
+function isOwnerEmail(email) {
+  return !!email && OWNER_EMAILS.includes(email.toLowerCase());
+}
+
+/** Build a synthetic top-role (oracle) app_user for an owner when no real row is usable. */
+function makeOwnerAppUser(session) {
+  const email = session.user.email?.toLowerCase();
+  const displayName = session.user.user_metadata?.full_name || email?.split('@')[0] || 'Owner';
+  return {
+    id: session.user.id,          // no real app_users row exists; reuse the auth id
+    auth_user_id: session.user.id,
+    email,
+    display_name: displayName,
+    ...splitDisplayName(displayName),
+    role: 'oracle',
+    avatar_url: session.user.user_metadata?.avatar_url || null,
+    person_id: null,
+    is_current_resident: false,
+    _synthesizedOwner: true,
+  };
+}
+
 /**
  * Split a display name into first_name and last_name.
  * Returns { first_name, last_name } or {} if name can't be parsed.
@@ -160,7 +196,9 @@ export async function initAuth() {
       authLog.info('Using cached auth for instant access');
       currentRole = cached.role;
       currentAppUser = cached.appUser;
-      currentPermissions = new Set(); // permissions fetched fresh from Supabase, not cached
+      // Owner: keep full access instantly so permission-gated pages don't hang
+      // during the cached window before handleAuthChange re-resolves.
+      currentPermissions = isOwnerEmail(cached.email) ? ALL_ACCESS_PERMISSIONS : new Set(); // fetched fresh from Supabase, not cached
       resolvedFromCache = true;
       // We still need the actual Supabase user object, so we don't set currentUser yet
       // but we resolve with a minimal user so the UI can proceed
@@ -295,7 +333,12 @@ async function handleAuthChange(session) {
     authLog.error('Error fetching app_user', { code: fetchError.code, message: fetchError.message });
   }
 
-  if (appUser) {
+  // Owner safety net: never lock the site owner out. Use their real row only when it
+  // already grants admin/oracle; otherwise (no row, timeout, or a stale low-role row)
+  // fall through to synthesize a top-role identity below.
+  const ownerOverride = isOwnerEmail(session.user.email);
+
+  if (appUser && (!ownerOverride || ['admin', 'oracle'].includes(appUser.role))) {
     currentAppUser = appUser;
     currentRole = appUser.role;
     currentUser.displayName = appUser.display_name || currentUser.user_metadata?.full_name || currentUser.email;
@@ -335,6 +378,15 @@ async function handleAuthChange(session) {
       5000,
       'Last login update timed out'
     ).catch(err => authLog.warn('Failed to update last login', err.message));
+  } else if (ownerOverride) {
+    // No usable app_users row for the owner — grant top-role access anyway so they
+    // are never locked out, even with the backend unprovisioned or unreachable.
+    authLog.warn('Owner allowlist — granting oracle without an app_users row', { email: session.user.email });
+    currentAppUser = makeOwnerAppUser(session);
+    currentRole = 'oracle';
+    currentPermissions = ALL_ACCESS_PERMISSIONS;
+    currentUser.displayName = currentAppUser.display_name;
+    cacheAuthState(currentUser, currentAppUser, 'oracle');
   } else {
     // User not in app_users - check for pending invitation (with timeout)
     const userEmail = session.user.email?.toLowerCase();
