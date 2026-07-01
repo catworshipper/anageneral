@@ -1,12 +1,12 @@
 {
-  "version": "v260701.01 11:34a",
-  "release": 1,
-  "sha": "84c829c",
-  "fullSha": "84c829c6ecb0e11d4a0d638a7a2198a1fc8aaec3",
+  "version": "v260701.02 11:37a",
+  "release": 2,
+  "sha": "033c825",
+  "fullSha": "033c8255e83463db9f4d8de9be5fac2392778739",
   "actor": "catworshipper",
   "source": "cloudflare-pages-deploy",
   "model": "ci",
-  "machine": "runnervmmklqx",
-  "pushedAt": "2026-07-01T13:34:11+02:00",
-  "commits": [{"sha":"84c829c","message":"Add gstack project guide and wire it into docs index","author":"AnastasiaBordiuh"}]
+  "machine": "runnervmkkn4f",
+  "pushedAt": "2026-07-01T13:37:03+02:00",
+  "commits": [{"sha":"033c825","message":"Point gstack guide at topwebweb.com, the project's actual live domain","author":"AnastasiaBordiuh"}]
 }
